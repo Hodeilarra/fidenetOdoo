@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- vim:fdl=1:
+-->
+<templates id="template" xml:space="preserve">
+
+    <!-- Cashiers drop-down list under NumPad -->
+    <t t-extend="PosWidget" >
+        <t t-jquery="footer" t-operation="append">
+            <div id="AlertNoCashier">You must create at least one cashier!</div>
+            <div id="cashier-footer">
+                <div id="cashier-title">
+                    Select a cashier :            
+                </div>
+                <div id="cashier-frame">
+                    <t t-esc="widget.get_cashiers(widget.get_cur_pos_config_id())" />
+                    <select id="cashier-select"></select>   
+                </div>           
+            </div>
+        </t>
+    </t>
+
+    <!-- Name of the cashier on Payement Page -->
+    <t t-extend="PaymentScreenWidget" >
+        <t t-jquery=".pos-step-container" t-operation="prepend">
+            <div id="pay-screen-cashier">Cashier : 
+                <span id="pay-screen-cashier-name">
+                </span>
+            </div>
+        </t>
+    </t>
+
+    <!-- Name of the cashier on Ticket -->
+    <t t-extend="PosTicket" >
+        <t t-jquery="#header-ticket" t-operation="append">
+            Cashier : <span id="ticket-screen-cashier-name"></span>
+        </t>
+    </t>
+
+</templates> 

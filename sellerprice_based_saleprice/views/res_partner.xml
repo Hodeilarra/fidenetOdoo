@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_res_partner_inherit" model="ir.ui.view">
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='sales_purchases']//group[@name='container_row_2']//group[@name='purchase']" position="inside">
+                <field name="cost_price_on_list_price"/>
+                <field name="cost_price_on_list_price_discount" attrs="{'invisible':[('cost_price_on_list_price','=',False)]}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

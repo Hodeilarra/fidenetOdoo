@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2015 DevIntelle Consulting Service Pvt.Ltd (<http://www.devintellecs.com>).
+
+For Module Support : devintelle@gmail.com  or Skype : devintelle
+ -->
+<odoo>
+
+    <record id="repair_line_discount_inheirted" model="ir.ui.view">
+        <field name="name">repair.line.discount.inheirted</field>
+        <field name="inherit_id" ref="repair.view_repair_order_form"/>
+        <field name="model">repair.order</field>
+        <field name="arch" type="xml">
+        	<xpath expr="//field[@name='operations']//tree//field[@name='price_unit']" position="before">
+				<field name="product_price"/>
+			</xpath>
+        </field>
+    </record>
+
+
+    <record id="repair_line_discount_inheirted2" model="ir.ui.view">
+        <field name="name">repair.line.discount.inheirted2</field>
+        <field name="inherit_id" ref="repair.view_repair_order_form"/>
+        <field name="model">repair.order</field>
+        <field name="arch" type="xml">
+        	<xpath expr="//field[@name='operations']//tree//field[@name='price_unit']" position="after">
+				<field name="discount"/>
+			</xpath>
+        </field>
+    </record>
+
+
+</odoo>

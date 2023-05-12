@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_sale_order_inherit" model="ir.ui.view">
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_shipping_id']" position="after"> 
+                <field name="valor"/>
+            </xpath>
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="valorBoton" invisible="1"/>
+                <button name="pick_one" class="oe_inline oe_stat_button" type="object" style="background:rgba(46, 210, 162,0.2);" string="Crear Proyecto" attrs="{'invisible': [('valorBoton', '=', True)]}"/>
+            </xpath>
+            <xpath expr="//field[@name='valor']" position="after">
+                <field name="proyectoPresupuesto" options="{'no_create':True}"/>
+            </xpath>
+            <xpath expr="//field[@name='payment_mode_id']" position="after">
+                <field name="cuentasAsociadas"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

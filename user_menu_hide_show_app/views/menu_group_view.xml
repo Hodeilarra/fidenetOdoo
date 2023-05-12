@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<odoo>
+
+	<record id="view_manu_group" model="ir.ui.view">
+			<field name="name">view_manu_ir_menu</field>
+			<field name="model">ir.ui.menu</field>
+			<field name="inherit_id" ref="base.edit_menu_access"/>
+			<field name="arch" type="xml">
+				<xpath expr="//notebook" position="inside">
+					<page string = "Restriction For User">
+						<field name ="hide_for_user"/>
+					</page>
+
+					<page string = "Access Restriction">
+						<field name ="group_name"/>
+					</page>
+
+				</xpath>
+			</field>
+		</record>
+
+</odoo>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+    
+        <record id="project_custom_sale_view_form" model="ir.ui.view">
+            <field name="name">project.from.inherited.sale</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button class="oe_stat_button"
+                            icon="fa-tasks"
+                            type="object" 
+                            name="action_view_sales" 
+                            string="Presupuestos" 
+                        />
+                </xpath>
+                <xpath expr="//header" position="inside">
+                    <button class="oe_highlight"
+                            type="object" 
+                            name="action_create_project_sales" 
+                            string="Crear Presupuesto Proyecto" 
+                        />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
+ 

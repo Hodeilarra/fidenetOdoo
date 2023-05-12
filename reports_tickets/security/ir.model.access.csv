@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_reports_tickets_reports_tickets,reports_tickets.reports_tickets,model_reports_tickets_reports_tickets,base.group_user,1,1,1,1

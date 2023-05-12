@@ -1,0 +1,23 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Odoo 14 Cebanc Modules",
+            "type": "python",
+            "request": "launch",
+            "program": "/home/prueba/odoo/v14/server/odoo-bin",
+            "args": [
+                "-c /home/prueba/odoo/v14/.odoorc",
+                "--update=testOdoo"
+            ],
+            "cwd": "/home/prueba/odoo/v14/server/",
+            "console": "integratedTerminal",
+            //"debugOptions": [
+            //    "WaitOnAbnormalExit",
+            //    "WaitOnNormalExit",
+            //    "RedirectOutPut",
+            //],
+            "redirectOutput": true,
+        }
+    ]
+}

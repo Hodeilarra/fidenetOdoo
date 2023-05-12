@@ -1,0 +1,57 @@
+<odoo>
+  <data>
+    <template id="tutorial_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                     <t t-set="o" t-value="doc"/>
+		            <t t-call="web.layout">
+		                <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)"/>
+		                <div class="page">
+		                    <div class="oe_structure"/>
+					
+					<h3>Ciclos Eizaguirre</h3>
+					<p>Guipuzcoa, Kalea 32 Bajo Zarautz Gipuzkoa, Guipúzcoa, España</p>
+                                        <h3>+34 943 83 48 69</h3>
+					<h4 t-esc="o.name" />
+					<p><b>Ingreso: </b><span t-field="o.create_date" t-options='{"format": "dd/MM/yyyy hh:mm"}' /></p>
+					<p><b t-if="o.partner_id">Nombre: </b><span t-field="o.partner_id.name" /></p>
+					<p><b t-if="o.partner_id.mobile">Telefono: </b><span t-field="o.partner_id.mobile" /></p>
+					<p><span t-if="o.quotation_notes"><b>Solicita: </b><span t-field="o.quotation_notes" /></span></p>
+					<p><span t-if="o.internal_notes"><b>Producto: </b><span t-field="o.internal_notes" /></span></p>
+					<p t-if="o.estimate_date"><b>Fecha Estimada de Entrega: </b><span t-field="o.estimate_date" t-options='{"format": "dd/MM/yyyy hh:mm"}' /></p>
+
+		                    <div class="oe_structure"/>
+		                </div>
+		            </t>
+                </t>
+            </t>
+        </template>
+
+
+        <record id="paperformat_ticket" model="report.paperformat">
+            <field name="name">Papel Térmico</field>
+            <field name="default" eval="False"/>
+            <field name="format">custom</field>
+            <field name="page_height">297</field>
+            <field name="page_width">79</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">10</field>
+            <field name="margin_bottom">20</field>
+            <field name="margin_left">3</field>
+            <field name="margin_right">3</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">15</field>
+            <field name="dpi">95</field>
+        </record>
+
+        <report
+            id="action_report_repair"
+            model="repair.order"
+            string="Ticket Reparación"
+            report_type="qweb-pdf"
+            paperformat="reports_tickets.paperformat_ticket"
+            name="reports_tickets.tutorial_report"
+            file="reports_tickets.tutorial_report"
+        />
+  </data>
+</odoo>

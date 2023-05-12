@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="product_template_only_form_view_add_categids_modify" model="ir.ui.view">
+        <field name="name">product.product.only.form.modify</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_variant_easy_edit_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='barcode']" position="after">
+                <field name="categ_id" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

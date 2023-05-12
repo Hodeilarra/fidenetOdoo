@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="SaleOrderButton" owl="1">
+        <div class="control-button">
+            <i class="fa fa-pencil-square-o" />
+            Create Sales Order
+        </div>
+    </t>
+    <t t-name="ViewSaleOrderButton" owl="1">
+        <div class="control-button">
+            <!--<i class="fa fa-eye" />-->
+            <i t-if="nextButton.command === 'deselect'" class="fa fa-eye"></i>
+            View Sales Order
+        </div>-->
+        <!--<div class="control-button" t-if="isNextButtonVisible" t-on-click="clickNext"
+                class="button next highlight">
+            <t t-if="!env.isMobile">
+                <t t-esc="nextButton.text" />
+            </t>
+            <t t-else="">
+                <i t-if="nextButton.command === 'deselect'" class="fa fa-trash"></i>
+                <i t-if="nextButton.command === 'set'" class="fa fa-check"></i>
+            </t>
+        </div>-->
+    </t>
+</templates>

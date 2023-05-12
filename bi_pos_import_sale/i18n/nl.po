@@ -1,0 +1,226 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* bi_pos_import_sale
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-12-14 12:46+0000\n"
+"PO-Revision-Date: 2021-12-14 12:46+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: bi_pos_import_sale
+#. openerp-web
+#: code:addons/bi_pos_import_sale/static/src/xml/pos_view.xml:0
+#, python-format
+msgid "Apply"
+msgstr "Van toepassing zijn"
+
+#. module: bi_pos_import_sale
+#. openerp-web
+#: code:addons/bi_pos_import_sale/static/src/xml/pos_view.xml:0
+#: code:addons/bi_pos_import_sale/static/src/xml/pos_view.xml:0
+#: code:addons/bi_pos_import_sale/static/src/xml/pos_view.xml:0
+#, python-format
+msgid "Cancel"
+msgstr "Annuleren"
+
+#. module: bi_pos_import_sale
+#: model:ir.model.fields,field_description:bi_pos_import_sale.field_pos_config__cancle_order
+#: model_terms:ir.ui.view,arch_db:bi_pos_import_sale.custom_bi_pos_import_sale_view
+msgid "Cancel Sale Order after Import"
+msgstr "Verkooporder annuleren na import"
+
+#. module: bi_pos_import_sale
+#. openerp-web
+#: code:addons/bi_pos_import_sale/static/src/xml/pos_view.xml:0
+#, python-format
+msgid "Company:"
+msgstr "Bedrijf:"
+
+#. module: bi_pos_import_sale
+#. openerp-web
+#: code:addons/bi_pos_import_sale/static/src/xml/pos_view.xml:0
+#, python-format
+msgid "Customer"
+msgstr "Klant"
+
+#. module: bi_pos_import_sale
+#. openerp-web
+#: code:addons/bi_pos_import_sale/static/src/xml/pos_view.xml:0
+#, python-format
+msgid "Customer:"
+msgstr "Klant:"
+
+#. module: bi_pos_import_sale
+#: model_terms:ir.ui.view,arch_db:bi_pos_import_sale.custom_bi_pos_import_sale_view
+msgid "Import Configuration in POS"
+msgstr "Configuratie importeren in POS"
+
+#. module: bi_pos_import_sale
+#. openerp-web
+#: code:addons/bi_pos_import_sale/static/src/xml/pos_view.xml:0
+#: code:addons/bi_pos_import_sale/static/src/xml/pos_view.xml:0
+#, python-format
+msgid "Import Order"
+msgstr "Bestelling importeren"
+
+#. module: bi_pos_import_sale
+#: model:ir.model.fields,field_description:bi_pos_import_sale.field_pos_config__check
+#: model_terms:ir.ui.view,arch_db:bi_pos_import_sale.custom_bi_pos_import_sale_view
+msgid "Import Sale Order"
+msgstr "Verkooporder importeren"
+
+#. module: bi_pos_import_sale
+#: model:ir.model.fields,field_description:bi_pos_import_sale.field_pos_order__sale_order_ids
+msgid "Imported Sale Order(s)"
+msgstr "Geïmporteerde verkooporder(s)"
+
+#. module: bi_pos_import_sale
+#: model:ir.model.fields,field_description:bi_pos_import_sale.field_pos_config__load_orders_days
+#: model_terms:ir.ui.view,arch_db:bi_pos_import_sale.custom_bi_pos_import_sale_view
+msgid "Load Orders of Last Days"
+msgstr "Bestellingen van de afgelopen dagen laden"
+
+#. module: bi_pos_import_sale
+#: model:ir.model.fields,field_description:bi_pos_import_sale.field_pos_config__load_draft_sent
+#: model_terms:ir.ui.view,arch_db:bi_pos_import_sale.custom_bi_pos_import_sale_view
+msgid "Load only draft/sent sale orders"
+msgstr "Alleen concept/verzonden verkooporders laden"
+
+#. module: bi_pos_import_sale
+#. openerp-web
+#: code:addons/bi_pos_import_sale/static/src/xml/pos_view.xml:0
+#, python-format
+msgid "Order Date"
+msgstr "Besteldatum"
+
+#. module: bi_pos_import_sale
+#. openerp-web
+#: code:addons/bi_pos_import_sale/static/src/xml/pos_view.xml:0
+#, python-format
+msgid "Order Date:"
+msgstr "Besteldatum:"
+
+#. module: bi_pos_import_sale
+#. openerp-web
+#: code:addons/bi_pos_import_sale/static/src/xml/pos_view.xml:0
+#, python-format
+msgid "Order Details"
+msgstr "Bestel Details"
+
+#. module: bi_pos_import_sale
+#. openerp-web
+#: code:addons/bi_pos_import_sale/static/src/xml/pos_view.xml:0
+#, python-format
+msgid "Order Number"
+msgstr "Bestelnummer"
+
+#. module: bi_pos_import_sale
+#. openerp-web
+#: code:addons/bi_pos_import_sale/static/src/xml/pos_view.xml:0
+#, python-format
+msgid "Order Qty"
+msgstr "Bestel aantal"
+
+#. module: bi_pos_import_sale
+#. openerp-web
+#: code:addons/bi_pos_import_sale/static/src/xml/pos_view.xml:0
+#, python-format
+msgid "Order Ref:"
+msgstr "Bestelreferentie:"
+
+#. module: bi_pos_import_sale
+#: model:ir.model,name:bi_pos_import_sale.model_pos_config
+msgid "Point of Sale Configuration"
+msgstr "Configuratie van verkooppunt"
+
+#. module: bi_pos_import_sale
+#: model:ir.model,name:bi_pos_import_sale.model_pos_order
+msgid "Point of Sale Orders"
+msgstr "Verkooppunt bestellingen"
+
+#. module: bi_pos_import_sale
+#. openerp-web
+#: code:addons/bi_pos_import_sale/static/src/xml/pos_view.xml:0
+#, python-format
+msgid "Price"
+msgstr "Prijs"
+
+#. module: bi_pos_import_sale
+#. openerp-web
+#: code:addons/bi_pos_import_sale/static/src/xml/pos_view.xml:0
+#: code:addons/bi_pos_import_sale/static/src/xml/pos_view.xml:0
+#, python-format
+msgid "Product"
+msgstr "Product"
+
+#. module: bi_pos_import_sale
+#. openerp-web
+#: code:addons/bi_pos_import_sale/static/src/xml/pos_view.xml:0
+#, python-format
+msgid "Quantity"
+msgstr "Hoeveelheid"
+
+#. module: bi_pos_import_sale
+#. openerp-web
+#: code:addons/bi_pos_import_sale/static/src/xml/pos_view.xml:0
+#, python-format
+msgid "Sale Orders"
+msgstr "Verkooporders"
+
+#. module: bi_pos_import_sale
+#. openerp-web
+#: code:addons/bi_pos_import_sale/static/src/xml/pos_view.xml:0
+#, python-format
+msgid "Sale order Products"
+msgstr "Verkooporder Producten"
+
+#. module: bi_pos_import_sale
+#. openerp-web
+#: code:addons/bi_pos_import_sale/static/src/xml/pos_view.xml:0
+#, python-format
+msgid "Saleperson"
+msgstr "Verkoper"
+
+#. module: bi_pos_import_sale
+#. openerp-web
+#: code:addons/bi_pos_import_sale/static/src/xml/pos_view.xml:0
+#, python-format
+msgid "Saleperson:"
+msgstr "Verkoper:"
+
+#. module: bi_pos_import_sale
+#. openerp-web
+#: code:addons/bi_pos_import_sale/static/src/xml/pos_view.xml:0
+#, python-format
+msgid "Search Orders"
+msgstr "Zoek bestellingen"
+
+#. module: bi_pos_import_sale
+#. openerp-web
+#: code:addons/bi_pos_import_sale/static/src/xml/pos_view.xml:0
+#: code:addons/bi_pos_import_sale/static/src/xml/pos_view.xml:0
+#, python-format
+msgid "Subtotal"
+msgstr "Subtotaal"
+
+#. module: bi_pos_import_sale
+#. openerp-web
+#: code:addons/bi_pos_import_sale/static/src/xml/pos_view.xml:0
+#, python-format
+msgid "Total"
+msgstr "Totaal"
+
+#. module: bi_pos_import_sale
+#. openerp-web
+#: code:addons/bi_pos_import_sale/static/src/xml/pos_view.xml:0
+#, python-format
+msgid "Total Amount:"
+msgstr "Totale hoeveelheid:"

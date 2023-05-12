@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="repair_tutorial_report_inherit" inherit_id="reports_tickets.tutorial_report">
+        <xpath expr="//div[@class='page']" position="after">
+            <div t-if="o.codigo_barras" class="col-3 bm-2">
+                <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', o.codigo_barras, 600, 100)" style="width:300px;height:50px;" alt="Barcode"/>
+            </div>
+        </xpath>
+    </template>
+</odoo>

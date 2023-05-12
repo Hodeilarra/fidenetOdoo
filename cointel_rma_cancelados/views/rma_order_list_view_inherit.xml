@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="external_module_rma_search_view" model="ir.ui.view">
+            <field name="name">rma.search.external.module</field>
+            <field name="model">rma</field>
+            <field name="inherit_id" ref="rma.rma_view_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search/group" position="inside">
+                    <filter string="Activos" name="not_cancelled" domain="[('state', '!=', 'cancelled')]"/>
+                    <filter string="Cancelados" name="cancelled" domain="[('state', '=', 'cancelled')]"/>
+                </xpath>
+            </field>
+        </record>
+
+         <record id="external_module_rma_tree_view" model="ir.ui.view">
+            <field name="name">rma.tree.external.module</field>
+            <field name="model">rma</field>
+            <field name="inherit_id" ref="rma.rma_view_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree/field[@name='state']" position="replace">
+                    <field name="state" optional="show" widget="badge"
+                           decoration-success="state in ('done', 'confirmed')"
+                           decoration-info="state=='received'"
+                           decoration-warning="state=='replaced'"
+                           decoration-danger="state in ('draft', 'returned')" />
+                </xpath>
+            </field>
+        </record>
+
+         <record id="rma_action" model="ir.actions.act_window">
+        <field name="name">RMA</field>
+        <field name="res_model">rma</field>
+        <field name="view_mode">tree,form,pivot,calendar,activity</field>
+        <field name="context">{'search_default_not_cancelled': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Click to add a new RMA.
+            </p>
+        </field>
+    </record>
+    </data>
+</odoo>

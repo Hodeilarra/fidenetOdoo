@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_picking_form" model="ir.ui.view">
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='origin']" position="after">
+                <field name="hidep" invisible="1"/>
+                <field name="hide" invisible="1"/>
+                <field name="sale_id" attrs="{'invisible': [('hide', '=', True)]}" string="Documento origen"/>
+                <field name="purchase_id" attrs="{'invisible': [('hidep', '=', True)]}" string="Documento origen"/>
+            </xpath>
+            <field name="hide" invisible="1"/>
+            <field name="hidep" invisible="1"/>
+            <xpath expr="//field[@name='origin']" position="attributes">
+                <attribute  name="attrs" >{'invisible': ['|',('hidep', '=', False),('hide', '=', False)]}</attribute>>
+            </xpath>
+
+
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <field name="sale_id" invisible="1" />
+                <button
+                    name="action_view_sale_order"
+                    class="oe_stat_button"
+                    icon="fa-dollar"
+                    string="Documento origen"
+                    type="object"
+                    attrs="{'invisible': [('sale_id', '=', False)]}"
+                    groups="stock.group_stock_user"
+                >
+                </button>
+            </xpath>
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <field name="purchase_id" invisible="1" />
+                <button
+                    name="action_view_purchase_order"
+                    class="oe_stat_button"
+                    icon="fa-shopping-cart"
+                    string="Documento origen"
+                    type="object"
+                    attrs="{'invisible': [('purchase_id', '=', False)]}"
+                    groups="stock.group_stock_user"
+                >
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

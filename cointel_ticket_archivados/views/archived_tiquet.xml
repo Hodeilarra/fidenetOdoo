@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="helpdesk_ticket_view_search_inherit" model="ir.ui.view">
+            <field name="name">helpdesk.ticket.view.search.inherit</field>
+            <field name="model">helpdesk.ticket</field>
+            <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_search"/>
+            <field name="arch" type="xml">
+                <filter string="Archivados" name="archived" domain="[('active', '=', False)]"/>
+            </field>
+        </record>
+    </data>
+</odoo>

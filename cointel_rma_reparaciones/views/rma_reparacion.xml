@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_rma_reparacion_inherit" model="ir.ui.view">
+        <field name="model">rma</field>
+        <field name="inherit_id" ref="rma.rma_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='picking_id']" position="after">
+                <!--<field name="seleccion_producto"/>-->
+                <field name="seleccion_producto" widget="selection" />
+            </xpath>
+            <xpath expr="//field[@name='operation_id']" position="after">
+                <field name="reparacion" readonly="1"/>
+            </xpath>
+            <xpath expr="//button[@name='action_refund'][1]" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+        </field>
+    </record>
+    
+    <record id="view_rma_repair_tree_inherit" model="ir.ui.view">
+        <field name="model">rma</field>
+        <field name="inherit_id" ref="rma.rma_view_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='deadline']" position="after">
+                <field name="reparacion"/>
+                <field name="estado_reparacion"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

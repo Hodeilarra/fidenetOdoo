@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!--PROFORMAS-->
+        <record id="view_sale_order_proforma_tree" model="ir.ui.view">
+            <field name="name">sale.order.proforma.tree</field>
+            <field name="model">sale.order</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <!-- Definir las columnas de la vista de árbol aquí -->
+                    <field name="message_needaction" invisible="1"/>
+                    <field name="name" string="Number" readonly="1" decoration-bf="1"/>
+                    <field name="date_order" string="Order Date" widget="date" optional="show"/>
+                    <field name="commitment_date" optional="hide"/>
+                    <field name="expected_date" optional="hide"/>
+                    <field name="partner_id" readonly="1"/>
+                    <field name="client_order_ref" string="Referencia obra"/>
+                    <field name="project_id"/>
+                    <field name="user_id" optional="show" widget="many2one_avatar_user"/>
+                    <field name="activity_ids" widget="list_activity" optional="show"/>
+                    <field name="team_id" optional="hide"/>
+                    <field name="company_id" groups="base.group_multi_company" optional="show" readonly="1"/>
+                    <field name="amount_untaxed" sum="Total Tax Excluded" widget="monetary" optional="hide"/>
+                    <field name="amount_tax" sum="Tax Total" widget="monetary" optional="hide"/>
+                    <field name="amount_total" sum="Total Tax Included" widget="monetary" decoration-bf="1" optional="show"/>
+                    <field name="currency_id" invisible="1"/>
+                    <field name="invoice_status" decoration-success="invoice_status == 'invoiced'" decoration-info="invoice_status == 'to invoice'" decoration-warning="invoice_status == 'upselling'" widget="badge" optional="show"/>
+                    <field name="tag_ids" optional="hide" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                    <field name="state"  decoration-success="state == 'sale' or state == 'done'" decoration-info="state == 'draft' or state == 'sent'" widget="badge"/>
+                </tree>
+            </field>
+        </record>
+        <record id="action_sale_proformas" model="ir.actions.act_window">
+            <field name="name">Proformas</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_sale_order_proforma_tree"/>
+            <field name="domain">[('type_id', '=', 2)]</field>
+            <field name="context">{'from_proforma_view': True}</field>
+        </record>
+        <!--PRESUPUESTOS-->
+        <record id="view_sale_order_tree" model="ir.ui.view">
+            <field name="name">sale.order.tree</field>
+            <field name="model">sale.order</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <!-- Definir las columnas de la vista de árbol aquí -->
+                    <field name="message_needaction" invisible="1"/>
+                    <field name="name" string="Number" readonly="1" decoration-bf="1"/>
+                    <field name="date_order" string="Order Date" widget="date" optional="show"/>
+                    <field name="commitment_date" optional="hide"/>
+                    <field name="expected_date" optional="hide"/>
+                    <field name="partner_id" readonly="1"/>
+                     <field name="client_order_ref" string="Referencia obra"/>
+                    <field name="project_id"/>
+                    <field name="user_id" optional="show" widget="many2one_avatar_user"/>
+                    <field name="activity_ids" widget="list_activity" optional="show"/>
+                    <field name="team_id" optional="hide"/>
+                    <field name="company_id" groups="base.group_multi_company" optional="show" readonly="1"/>
+                    <field name="amount_untaxed" sum="Total Tax Excluded" widget="monetary" optional="hide"/>
+                    <field name="amount_tax" sum="Tax Total" widget="monetary" optional="hide"/>
+                    <field name="amount_total" sum="Total Tax Included" widget="monetary" decoration-bf="1" optional="show"/>
+                    <field name="currency_id" invisible="1"/>
+                    <field name="invoice_status" decoration-success="invoice_status == 'invoiced'" decoration-info="invoice_status == 'to invoice'" decoration-warning="invoice_status == 'upselling'" widget="badge" optional="show"/>
+                    <field name="tag_ids" optional="hide" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                    <field name="state" decoration-success="state == 'sale' or state == 'done'" decoration-info="state == 'draft' or state == 'sent'" widget="badge"/>
+                </tree>
+            </field>
+        </record>
+        <record id="action_sale_presupuestos" model="ir.actions.act_window">
+            <field name="name">Presupuestos</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_sale_order_tree"/>
+            <field name="domain">[('type_id', '!=', 3)]</field>
+            <field name="context">{}</field>
+        </record>
+        <!--TODOS-->
+        <record id="view_sale_order_pre_pro_tree" model="ir.ui.view">
+            <field name="name">sale.order.pre.pro.tree</field>
+            <field name="model">sale.order</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <!-- Definir las columnas de la vista de árbol aquí -->
+                    <field name="message_needaction" invisible="1"/>
+                    <field name="name" string="Number" readonly="1" decoration-bf="1"/>
+                    <field name="date_order" string="Order Date" widget="date" optional="show"/>
+                    <field name="commitment_date" optional="hide"/>
+                    <field name="expected_date" optional="hide"/>
+                    <field name="partner_id" readonly="1"/>
+                    <field name="client_order_ref" string="Referencia obra"/>
+                    <field name="project_id"/>
+                    <field name="user_id" optional="show" widget="many2one_avatar_user"/>
+                    <field name="activity_ids" widget="list_activity" optional="show"/>
+                    <field name="team_id" optional="hide"/>
+                    <field name="company_id" groups="base.group_multi_company" optional="show" readonly="1"/>
+                    <field name="amount_untaxed" sum="Total Tax Excluded" widget="monetary" optional="hide"/>
+                    <field name="amount_tax" sum="Tax Total" widget="monetary" optional="hide"/>
+                    <field name="amount_total" sum="Total Tax Included" widget="monetary" decoration-bf="1" optional="show"/>
+                    <field name="currency_id" invisible="1"/>
+                    <field name="invoice_status" decoration-success="invoice_status == 'invoiced'" decoration-info="invoice_status == 'to invoice'" decoration-warning="invoice_status == 'upselling'" widget="badge" optional="show"/>
+                    <field name="tag_ids" optional="hide" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                    <field name="state"  decoration-success="state == 'sale' or state == 'done'" decoration-info="state == 'draft' or state == 'sent'" widget="badge"/>
+                </tree>
+            </field>
+        </record>
+        <record id="action_sale_pre_pro" model="ir.actions.act_window">
+            <field name="name">PRE/PRO</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_sale_order_pre_pro_tree"/>
+        </record>
+        <!--ACEPTADOS-->
+        <record id="view_sale_order_acepted_tree" model="ir.ui.view">
+            <field name="name">sale.order.pre.pro.tree</field>
+            <field name="model">sale.order</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <!-- Definir las columnas de la vista de árbol aquí -->
+                    <field name="message_needaction" invisible="1"/>
+                    <field name="name" string="Number" readonly="1" decoration-bf="1"/>
+                    <field name="date_order" string="Order Date" widget="date" optional="show"/>
+                    <field name="commitment_date" optional="hide"/>
+                    <field name="expected_date" optional="hide"/>
+                    <field name="partner_id" readonly="1"/>
+                     <field name="client_order_ref" string="Referencia obra"/>
+                    <field name="project_id"/>
+                    <field name="user_id" optional="show" widget="many2one_avatar_user"/>
+                    <field name="activity_ids" widget="list_activity" optional="show"/>
+                    <field name="team_id" optional="hide"/>
+                    <field name="company_id" groups="base.group_multi_company" optional="show" readonly="1"/>
+                    <field name="amount_untaxed" sum="Total Tax Excluded" widget="monetary" optional="hide"/>
+                    <field name="amount_tax" sum="Tax Total" widget="monetary" optional="hide"/>
+                    <field name="amount_total" sum="Total Tax Included" widget="monetary" decoration-bf="1" optional="show"/>
+                    <field name="currency_id" invisible="1"/>
+                    <field name="invoice_status" decoration-success="invoice_status == 'invoiced'" decoration-info="invoice_status == 'to invoice'" decoration-warning="invoice_status == 'upselling'" widget="badge" optional="show"/>
+                    <field name="tag_ids" optional="hide" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                    <field name="state"  decoration-success="state == 'sale' or state == 'done'" decoration-info="state == 'draft' or state == 'sent'" widget="badge"/>
+                </tree>
+            </field>
+        </record>
+        <record id="action_sale_acepted" model="ir.actions.act_window">
+            <field name="name">Confirmados</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_sale_order_acepted_tree"/>
+            <field name="domain">[('state', '=', 'sale')]</field>
+        </record>
+        <record id="sale.menu_sale_quotations" model="ir.ui.menu">
+            <field name="active" eval="False"/>
+        </record>
+        <record id="sale.menu_sale_order" model="ir.ui.menu">
+            <field name="active" eval="False"/>
+        </record>
+        <menuitem id="menu_sale_proformas"
+          name="Proformas"
+          parent="sale.sale_order_menu"
+          sequence="3"
+          action="action_sale_proformas"/>
+        <menuitem id="menu_sale_presupuestos"
+          name="Presupuestos"
+          parent="sale.sale_order_menu"
+          sequence="2"
+          action="action_sale_presupuestos"/>
+        <menuitem id="menu_sale_pre_pro"
+          name="PRE/PRO Todos"
+          parent="sale.sale_order_menu"
+          sequence="1"
+          action="action_sale_pre_pro"/>
+        <menuitem id="menu_sale_acepted"
+          name="Confirmados"
+          parent="sale.sale_order_menu"
+          sequence="4"
+          action="action_sale_acepted"/>
+    </data>
+
+    <!--MODIFICAMOS EL SEQUENCE DE LOS MENÚS QUE EXISTEN-->
+
+    
+
+    <record id="sale.report_sales_team" model="ir.ui.menu">
+            <field name="sequence" eval="6"/>
+        </record>
+
+          <record id="sale.res_partner_menu" model="ir.ui.menu">
+            <field name="sequence" eval="7"/>
+        </record>
+</odoo>

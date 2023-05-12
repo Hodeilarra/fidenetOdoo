@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_repair_order_iniciar_button_inherit" model="ir.ui.view">
+        <field name="model">repair.order</field>
+        <field name="inherit_id" ref="repair.view_repair_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button class="oe_highlight" type="object" name="iniciar_reparacion" string="Iniciar" attrs="{'invisible': [('state','!=', 'borrador')]}"/>
+            </xpath>
+            <xpath expr="//field[@name='user_id']" position="after">
+                    <field name="rma" readonly="1"/>
+                </xpath>
+        </field>
+    </record>
+    
+    <record id="view_repair_tree_rma_inherit" model="ir.ui.view">
+        <field name="model">repair.order</field>
+        <field name="inherit_id" ref="repair.view_repair_order_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='guarantee_limit']" position="after">
+                <field name="rma"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_repair_tree_rma_estate_inherit" model="ir.ui.view">
+        <field name="model">repair.order</field>
+        <field name="inherit_id" ref="repair.view_repair_order_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='rma']" position="after">
+                <field name="estado_rma"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

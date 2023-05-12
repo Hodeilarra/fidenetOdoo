@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="facturas_albaranes_sequence" model="ir.sequence">
+            <field name="name">Facturas Albaranes</field>
+            <field name="code">facturas.albaranes</field>
+            <field name="prefix">ALB/%(year)s/</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

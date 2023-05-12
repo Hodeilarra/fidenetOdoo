@@ -1,0 +1,55 @@
+#cashier-title{
+    vertical-align: middle;
+    display:inline-block;
+    text-align: left;
+    font-size: 16px;
+    font-weight: normal;
+    font-style: italic;
+    width: 45%;
+}
+
+#cashier-frame {
+    text-align: center;
+    vertical-align: middle;
+    display:inline-block;
+    border: 1px solid #000000;
+    width: 55%;
+    padding: 5px 0px 5px 0px;
+}
+
+#cashier-select{
+    width:95%;
+}
+
+#cashier-footer{
+    background: linear-gradient(#7B7979, #393939) repeat scroll 0 0 transparent;
+    display:block;  
+    color: #ffcc00;
+    padding: 10px 5px 10px 5px;
+}
+
+#pay-screen-cashier{
+    color: black;
+    border-bottom: 1px dashed #666666;
+    padding: 2px 2px 2px 2px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: italic;
+}
+
+#ticket-screen-cashier{
+    font-style: italic;
+    border-bottom : 1px solid gray;
+    padding-bottom: 2px;
+}
+
+#AlertNoCashier{
+    background: red url("../img/error.png") no-repeat 4px;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 12px 4px 4px 30px;
+    height: 24px;
+    text-transform: uppercase;
+} 

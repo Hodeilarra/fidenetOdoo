@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_general_ledger_report_wizard_form_inherit" model="ir.ui.view">
+            <field name="name">general.ledger.report.wizard.form.inherit</field>
+            <field name="model">general.ledger.report.wizard</field>
+            <field name="inherit_id" ref="account_financial_report.general_ledger_wizard"/>
+            <field name="arch" type="xml">
+                <field name="account_ids" position="before">
+                    <field name="account_ids_count" nolabel="1" readonly="1"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

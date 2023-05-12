@@ -1,0 +1,82 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sh_sale_disable_followers
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-07-30 13:39+0000\n"
+"PO-Revision-Date: 2021-07-30 13:39+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sh_sale_disable_followers
+#: model:ir.model,name:sh_sale_disable_followers.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: sh_sale_disable_followers
+#: model:ir.model,name:sh_sale_disable_followers.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: sh_sale_disable_followers
+#: model:ir.model.fields,field_description:sh_sale_disable_followers.field_res_company__sh_disable_sale_follower_email
+#: model:ir.model.fields,field_description:sh_sale_disable_followers.field_res_config_settings__sh_disable_sale_follower_email
+msgid "Disable to add Followers by Send by Email"
+msgstr ""
+
+#. module: sh_sale_disable_followers
+#: model:ir.model.fields,field_description:sh_sale_disable_followers.field_res_company__sh_disable_follower_salesperson
+#: model:ir.model.fields,field_description:sh_sale_disable_followers.field_res_config_settings__sh_disable_follower_salesperson
+msgid "Disable to add Salesperson as followers"
+msgstr ""
+
+#. module: sh_sale_disable_followers
+#: model:ir.model.fields,field_description:sh_sale_disable_followers.field_res_company__sh_disable_follower_confirm_sale
+#: model:ir.model.fields,field_description:sh_sale_disable_followers.field_res_config_settings__sh_disable_follower_confirm_sale
+msgid "Disable to add followers by Confirm Quotation"
+msgstr ""
+
+#. module: sh_sale_disable_followers
+#: model_terms:ir.ui.view,arch_db:sh_sale_disable_followers.sh_sale_config_setting_view
+msgid "Disable to add salesperson as follower configuration"
+msgstr ""
+
+#. module: sh_sale_disable_followers
+#: model:ir.model.fields,field_description:sh_sale_disable_followers.field_res_company__display_name
+#: model:ir.model.fields,field_description:sh_sale_disable_followers.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:sh_sale_disable_followers.field_sale_order__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: sh_sale_disable_followers
+#: model:ir.model.fields,field_description:sh_sale_disable_followers.field_res_company__id
+#: model:ir.model.fields,field_description:sh_sale_disable_followers.field_res_config_settings__id
+#: model:ir.model.fields,field_description:sh_sale_disable_followers.field_sale_order__id
+msgid "ID"
+msgstr ""
+
+#. module: sh_sale_disable_followers
+#. openerp-web
+#: code:addons/sh_sale_disable_followers/static/src/js/followers.js:0
+#, python-format
+msgid "Invite Follower"
+msgstr ""
+
+#. module: sh_sale_disable_followers
+#: model:ir.model.fields,field_description:sh_sale_disable_followers.field_res_company____last_update
+#: model:ir.model.fields,field_description:sh_sale_disable_followers.field_res_config_settings____last_update
+#: model:ir.model.fields,field_description:sh_sale_disable_followers.field_sale_order____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: sh_sale_disable_followers
+#: model:ir.model,name:sh_sale_disable_followers.model_sale_order
+msgid "Sales Order"
+msgstr ""

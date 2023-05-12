@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_repair_order_inherit" model="ir.ui.view">
+        <field name="model">repair.order</field>
+        <field name="inherit_id" ref="repair.view_repair_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="presupuesto"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_sale_order_inherit" model="ir.ui.view">
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="ocultar" invisible="1"/>
+                <field name="repair_id" attrs="{'invisible': [('ocultar', '=', True)]}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
