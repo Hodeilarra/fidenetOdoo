@@ -1,0 +1,142 @@
+<odoo>
+    <data>
+        <!--VISTAS DE PRESUPUESTOS-->
+        <!--COMPRAS-->
+        <record model="ir.ui.view" id="view_sales_compras_tree">
+            <field name="name">facturas.sales_compras.view.tree</field>
+            <field name="model">facturas.sales_compras</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="sequence"/>
+                    <field name="customer"/>
+                    <field name="supplier_id"/>
+                    <field name="direccion_entrega"/>
+                    <field name="fecha_entrega"/>
+                    <field name="fecha_confirmacion"/>
+                    <field name="amount_untaxed" sum="Subtotal"/>
+                    <field name="amount_total" sum="Total Amount"/>
+                    <field name="status" optional="show" widget="badge" decoration-success="status in ('posted','confirmed')" decoration-info="status=='pending'" decoration-warning="status=='archived'" decoration-danger="status in ('draft', 'cancel')"/>
+                </tree>
+            </field>
+        </record>
+        <!--FILTROS-->
+        <record model="ir.ui.view" id="facturas.sales_compras_search_view">
+            <field name="name">facturas.sales_compras.view.search</field>
+            <field name="model">facturas.sales_compras</field>
+            <field name="arch" type="xml">
+                <search>
+                    <filter string="Activos" name="not_archived" domain="[('status', '!=', 'archived')]" />
+                    <filter string="Archivados" name="archived" domain="[('status', '=', 'archived')]"/>
+                    <filter string="Confirmados" name="confirmed" domain="[('status', '=', 'confirmed')]"/>
+                </search>
+            </field>
+        </record>
+       
+        <!--FORMULARIO DE PRESUPUESTO DE COMPRA-->
+        <record model="ir.ui.view" id="view_sales_compras_form">
+            <field name="name">facturas.sales_compras.form</field>
+            <field name="model">facturas.sales_compras</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_toggle_archive" string="Archivar" type="object" class="btn-primary" attrs="{'invisible': [('status', '=', 'archived')]}"/>
+                        <button name="action_toggle_archive" string="Desarchivar" type="object" class="btn-primary" attrs="{'invisible': [('status', '!=', 'archived')]}"/>
+                        <button name="action_toggle_confirm" string="Confirmar" type="object" class="btn-primary" attrs="{'invisible': [('status', '=', 'confirmed')]}"/>
+                        <button name="action_toggle_confirm" string="Establecer a borrador" type="object" class="btn-primary" attrs="{'invisible': [('status', '!=', 'confirmed')]}"/>
+                         <!--<button name="create_invoice" string="Crear factura" type="object" class="btn-primary" attrs="{'invisible': [('status', '!=', 'confirmed')]}"/>-->
+                    </header>
+                    <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_related_albaran" type="object" class="oe_stat_button" icon="fa-regular fa-truck" attrs="{'invisible': [('has_related_albaran', '=', False)]}">
+                            <field name="related_albaran_count" widget="statinfo"/>
+                        </button>
+                    </div>
+                        <group>
+                            <group>
+                                <field name="customer"/>
+                                <field name="supplier_id"/>
+                                <field name="direccion_entrega"/>
+                                <field name="numero_confirmacion_fabrica"/>
+                                <field name="numero_pedido_cliente"/>
+                                <field name="related_sale"/>
+                                <field name="status" invisible="1"/>
+                                 <field name="has_related_albaran" invisible="1"/>
+                            </group>
+                            <group>
+                                <field name="fecha_entrega"/>
+                                <field name="fecha_confirmacion"/>
+                                <field name="payment_term_id"/>
+                                <field name="x_notes_purchase_agency"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Líneas de presupuesto">
+                                <field name="sales_compras_line_ids"  widget="one2many_list" nolabel="1">
+                                    <tree string="Lineas de presupuesto" editable="bottom">
+                                        <field name="product_id"/>
+                                        <field name="gramo_metro"/>
+                                        <field name="ancho"/>
+                                        <field name="cantidad"/>
+                                        <field name="precio"/>
+                                        <field name="tax_id" widget="many2many_tags"/>
+                                        <field name="discount"/>
+                                        <field name="price_subtotal"/>
+                                        <field name="fecha_entrega"/>
+                                        <field name="mand"/>
+                                        <field name="diametro"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Otra información">
+                                <group>
+                                    <field name="observaciones" placeholder="Observaciones" widget="text"/>
+                                </group>
+                            </page>
+                        </notebook>
+                        <div class="oe_subtotal_footer_separator" style="margin-top: 10px;"/>
+                        <div class="oe_subtotal_footer_separator" style="margin-top: 10px;"/>
+                        <group class="oe_subtotals">
+                            <div id="total" class="row" style="display: flex;flex-direction: row;flex-wrap: nowrap;justify-content: flex-end; margin-right: auto; font-size:15px;">
+                                <div class="row mt16 o_fields_in_some_view" >
+                                    <table class="table table-sm" style="page-break-inside: avoid;">
+                                        <tr class="border-black o_subtotal" style="">
+                                            <td>
+                                                <strong>Subtotal</strong>
+                                            </td>
+                                            <td class="text-right">
+                                                <field name="amount_untaxed" widget="monetary" options="{'currency_field': 'currency_id'}" nolabel="1"/>
+                                            </td>
+                                        </tr>
+                                        <tr style="">
+                                            <td>
+                                                    Impuestos
+                                                </td>
+                                            <td class="text-right">
+                                                <field name="amount_tax" widget="monetary" options="{'currency_field': 'currency_id'}" nolabel="1"/>
+                                            </td>
+                                        </tr>
+                                        <tr class="border-black o_total">
+                                            <td>
+                                                <strong>Total</strong>
+                                            </td>
+                                            <td class="text-right">
+                                                <field name="amount_total" widget="monetary" options="{'currency_field': 'currency_id'}" nolabel="1"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </group>
+                    </sheet>
+                    <!-- Chatter -->
+                        <div class="oe_chatter">
+                            
+                            <field name="message_follower_ids" groups="base.group_user"/>
+                            <field name="activity_ids"/>
+                            <field name="message_ids"/>
+                        </div>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

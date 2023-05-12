@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_partner_form_inherit" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='vat']" position="after">
+                    <field name="mand"/>
+                    <field name="diametro"/>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_res_partner_form_inherit" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="action_view_custom_sales_ventas"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-file-text-o"
+                        help="Presupuestos de venta de agencia">
+                        <field name="custom_sales_ventas_count" widget="statinfo" string="Agencia ventas"/>
+                    </button>
+                    <button name="action_view_custom_sales_compras"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-file-text-o"
+                        help="Presupuestos de compra de agencia">
+                        <field name="custom_sales_compras_count" widget="statinfo" string="Agencia compras"/>
+                    </button>
+                    <button name="action_view_custom_facturas_cliente"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-file-text-o"
+                        help="Facturado agencia cliente">
+                        <field name="custom_facturas_cliente_total"  widget="statinfo" string="Agencia facturado cliente"/>
+                    </button>
+                    <button name="action_view_custom_facturas_proveedor"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-file-text-o"
+                        help="Facturado agencia proveedor">
+                        <field name="custom_facturas_proveedor_total"  widget="statinfo" string="Agencia facturado proveedor"/>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_partner_form_inherit2" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <page name="sales_purchases" position="inside">
+                    <group>
+                        <field name="x_notes_sale_agency"/>
+                        <field name="x_notes_purchase_agency"/>
+                    </group>
+                    <group>
+                        <field name="x_notes_invoice_agency"/>
+                        <field name="x_notes_delivery_agency"/>
+                    </group>
+                </page>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_facturas_invoice,access_facturas_invoice,model_facturas_invoice,base.group_user,1,1,1,1
+access_facturas_sales_ventas,access_facturas_sales_ventas,model_facturas_sales_ventas,base.group_user,1,1,1,1
+access_facturas_sales_compras,access_facturas_sales_compras,model_facturas_sales_compras,base.group_user,1,1,1,1
+access_facturas_albaranes,access_facturas_albaranes,model_facturas_albaranes,base.group_user,1,1,1,1
+access_facturas_invoice_line,access_facturas_invoice_line,model_facturas_invoice_line,base.group_user,1,1,1,1
+access_facturas_sales_ventas_line,access_facturas_sales_ventas_line,model_facturas_sales_ventas_line,base.group_user,1,1,1,1
+access_facturas_sales_compras_line,access_facturas_sales_compras_line,model_facturas_sales_compras_line,base.group_user,1,1,1,1
+access_facturas_albaranes_line,access_facturas_albaranes_line,model_facturas_albaranes_line,base.group_user,1,1,1,1
+access_account_move_origin_all,account.move.origin,model_account_move_origin,base.group_user,1,0,1,0

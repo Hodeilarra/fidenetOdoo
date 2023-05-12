@@ -1,0 +1,184 @@
+<odoo>
+    <data>
+        <!-- VISTAS DE FACTURAS -->
+        <record model="ir.ui.view" id="facturas.invoice_list_view">
+            <field name="name">facturas.invoice.view.tree</field>
+            <field name="model">facturas.invoice</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <header>
+                        <button name="create_invoice_by_supplier_action" type="object" string="Crear factura por proveedor" class="oe_highlight"/>
+                    </header>
+                    <field name="sequence"/>
+                    <field name="customer"/>
+                    <field name="supplier_id"/>
+                    <field name="factory_order_number"/>
+                    <field name="customer_order_number"/>
+                    <field name="invoice_date"/>
+                    <field name="invoice_date_due"/>
+                    <field name="comision"/>
+                    <field name="amount_untaxed" sum="Subtotal"/>
+                    <field name="amount_total" sum="Total Amount"/>
+                    <field name="total_comision" sum="Total Comisión"/>
+                    <field name="status" optional="show" widget="badge" decoration-success="status in ('posted','confirmed')" decoration-info="status=='pending'" decoration-warning="status=='archived'" decoration-danger="status in ('draft', 'cancel')"/>
+                </tree>
+              
+
+            </field>
+        </record>
+        <record model="ir.ui.view" id="facturas.invoice_search_view">
+            <field name="name">facturas.invoice.view.search</field>
+            <field name="model">facturas.invoice</field>
+            <field name="arch" type="xml">
+                <search>
+                    <filter string="Activos" name="not_archived" domain="[('status', '!=', 'archived')]" />
+                    <filter string="Archivados" name="archived" domain="[('status', '=', 'archived')]"/>
+                    <filter string="Confirmados" name="confirmed" domain="[('status', '=', 'confirmed')]"/>
+                    <group expand="0" string="Agrupar por">
+                        <filter string="Proveedor" name="group_by_supplier" context="{'group_by': 'supplier_id'}"/>
+                        <filter string="Fecha de Factura" name="group_by_invoice_date" context="{'group_by': 'invoice_date'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <!-- VISTAS DEL FORMULARIO -->
+        <record id="view_facturas_invoice_form" model="ir.ui.view">
+            <field name="name">facturas.invoice.form</field>
+            <field name="model">facturas.invoice</field>
+            <field name="arch" type="xml">
+                <form string="Factura">
+                    <header>
+                        <button name="action_toggle_archive" string="Archivar" type="object" class="btn-primary" attrs="{'invisible': [('status', '=', 'archived')]}"/>
+                        <button name="action_toggle_archive" string="Desarchivar" type="object" class="btn-primary" attrs="{'invisible': [('status', '!=', 'archived')]}"/>
+                        <button name="action_toggle_confirm" string="Confirmar" type="object" class="btn-primary" attrs="{'invisible': [('status', '=', 'confirmed')]}"/>
+                        <button name="action_toggle_confirm" string="Establecer a borrador" type="object" class="btn-primary" attrs="{'invisible': [('status', '!=', 'confirmed')]}"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <!-- Tus campos de factura aquí -->
+                            <!-- <field name="sequence"/>-->
+                            <group>
+                                <field name="customer"/>
+                                <field name="supplier_id"/>
+                                <field name="invoice_id"/>
+                                <field name="factory_order_number"/>
+                                <field name="customer_order_number"/>
+                                <field name="related_document"/>
+                                <field name="invoice_date"/>
+                                <field name="payment_term_id"/>
+                                <field name="invoice_date_due"/>
+                            </group>
+                            <group>
+                                <field name="comision"/>
+                                <field name="total_comision"/>
+                                <field name="x_notes_invoice_agency"/>
+                                <field name="status" optional="show" invisible="1"/>
+                            </group>
+                        </group>
+                        <field name="invoice_line_ids" context="{'form_view_ref': 'facturas.view_facturas_invoice_line_form'}" widget="one2many_list" nolabel="1">
+                            <tree string="Líneas de Factura" editable="bottom">
+                                <field name="product_id"/>
+                                <field name="quantity"/>
+                                <field name="price_unit"/>
+                                <field name="discount"/>
+                                <field name="tax_id" widget="many2many_tags"/>
+                                <field name="price_subtotal"/>
+                            </tree>
+                            <form>
+                                <group>
+                                    <field name="product_id"/>
+                                    <field name="quantity"/>
+                                    <field name="price_unit"/>
+                                    <field name="discount"/>
+                                    <field name="tax_id" widget="many2many_tags"/>
+                                </group>
+                            </form>
+                        </field>
+                        <div class="oe_subtotal_footer_separator" style="margin-top: 10px;"/>
+                        <group class="oe_subtotals">
+                            <div id="total" class="row" style="display: flex;flex-direction: row;flex-wrap: nowrap;justify-content: flex-end; margin-right: auto; font-size:15px;">
+                                <div class="row mt16 o_fields_in_some_view">
+                                    <table class="table table-sm" style="page-break-inside: avoid;">
+                                        <tr class="border-black o_subtotal" style="">
+                                            <td>
+                                                <strong>Subtotal</strong>
+                                            </td>
+                                            <td class="text-right">
+                                                <field name="amount_untaxed" widget="monetary" options="{'currency_field': 'currency_id'}" nolabel="1"/>
+                                            </td>
+                                        </tr>
+                                        <tr style="">
+                                            <td>
+                                                    Impuestos
+                                            </td>
+                                            <td class="text-right">
+                                                <field name="amount_tax" widget="monetary" options="{'currency_field': 'currency_id'}" nolabel="1"/>
+                                            </td>
+                                        </tr>
+                                        <tr class="border-black o_total">
+                                            <td>
+                                                <strong>Total</strong>
+                                            </td>
+                                            <td class="text-right">
+                                                <field name="amount_total" widget="monetary" options="{'currency_field': 'currency_id'}" nolabel="1"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </group>
+                    </sheet>
+                    <!-- Chatter -->
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" groups="base.group_user"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <!-- Facturas Invoice Line -->
+        <record id="view_facturas_invoice_line_form" model="ir.ui.view">
+            <field name="name">facturas.invoice.line.form</field>
+            <field name="model">facturas.invoice.line</field>
+            <field name="arch" type="xml">
+                <form string="Línea de Factura">
+                    <sheet>
+                        <group>
+                            <field name="product_id"/>
+                            <field name="quantity"/>
+                            <field name="price_unit"/>
+                            <field name="discount"/>
+                            <field name="tax_id" widget="many2many_tags"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!--ACTUALIZAMOS LA VISTA DE FACTURA DE ODOO PARA MOSTRAR LOS DOCUMENTOS DE ORIGEN-->
+        <record id="view_account_move_form_inherit" model="ir.ui.view">
+            <field name="name">account.move.form.inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='invoice_line_ids']/ancestor::notebook" position="inside">
+                    <page string="Documentos de Origen">
+                        <field name="origin_ids">
+                            <tree>
+                                <field name="origin_id"/>
+                                <field name="related_invoice_id"/>
+                            </tree>
+                            <form>
+                                <group>
+                                    <field name="origin_id"/>
+                                    <field name="related_invoice_id"/>
+
+                                </group>
+                            </form>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

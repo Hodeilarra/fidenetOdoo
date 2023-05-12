@@ -1,0 +1,48 @@
+<odoo>
+    <data>
+        <!-- DEFINICIONES DE MENUS -->
+       
+        <!--FACTURAS-->
+        <record model="ir.actions.act_window" id="facturas.action_window">
+            <field name="name">Facturas</field>
+            <field name="res_model">facturas.invoice</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'search_default_not_archived': 1}</field>
+        </record>
+
+        <!--PRESUPUESTOS VENTAS-->
+        <record model="ir.actions.act_window" id="facturas.sales_ventas_window">
+            <field name="name">Ventas</field>
+            <field name="res_model">facturas.sales_ventas</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'search_default_not_archived': 1}</field>
+        </record>
+
+         <!--PRESUPUESTOS COMPRAS-->
+        <record model="ir.actions.act_window" id="facturas.sales_compras_window">
+            <field name="name">Compras</field>
+            <field name="res_model">facturas.sales_compras</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'search_default_not_archived': 1}</field>
+        </record>
+        
+        <!--ALBARANES-->
+        <record model="ir.actions.act_window" id="facturas.albaranes_window">
+            <field name="name">Albaranes</field>
+            <field name="res_model">facturas.albaranes</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'search_default_not_archived': 1}</field>
+        </record>
+        <!-- Top menu item -->
+        <menuitem name="Agencia" id="facturas.menu_root" web_icon="facturas,static/description/icon.png"/>
+        <!-- menu categories -->
+        <menuitem name="Facturas" id="facturas.invoice_menu" parent="facturas.menu_root" action="facturas.action_window"/>
+        <!--PRESUPUESTOS-->
+        <menuitem name="Presupuestos" id="facturas.presupuestos_menu" parent="facturas.menu_root"/>
+        <menuitem name="Ventas" id="facturas.sales_ventas_menu" parent="facturas.presupuestos_menu" action="facturas.sales_ventas_window"/>
+        <menuitem name="Compras" id="facturas.sales_compras_menu" parent="facturas.presupuestos_menu" action="facturas.sales_compras_window"/>
+
+         <!--ALBARANES-->
+        <menuitem name="Albaranes" id="facturas.albaranes_menu" parent="facturas.menu_root" action="facturas.albaranes_window"/>
+    </data>
+</odoo>

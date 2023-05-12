@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_compra_report" model="ir.actions.report">
+            <field name="name">Presupuesto de compra</field>
+            <field name="model">facturas.sales_compras</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">facturas.compra_report_template</field>
+            <field name="report_file">facturas.compra_report_template</field>
+            <field name="binding_model_id" ref="model_facturas_sales_compras"/>
+            <field name="binding_type">report</field>
+            <field name="binding_view_types">list,form</field>
+        </record>
+        <template id="compra_report_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.external_layout">
+                        <t t-set="doc" t-value="doc.with_context(lang=doc.customer.lang)"/>
+                        <t t-set="address">
+                            <div t-field="doc.customer" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
+                            <p t-if="doc.customer.vat">
+                                <t t-esc="doc.company_id.country_id.vat_label or 'Tax ID'"/>:
+                                <span t-field="doc.customer.vat"/>
+                            </p>
+                        </t>
+                        <div class="page">
+                           
+                            <h2 class="mt16">
+                                <span>Presupuesto de compra # </span>
+                                <span t-field="doc.sequence"/>
+                            </h2>
+                            <div class="row mt32 mb32" id="informations">
+                                <div t-if="doc.numero_pedido_cliente" class="col-auto col-3 mw-100 mb-2">
+                                    <strong>Número pedido cliente:</strong>
+                                    <p class="m-0" t-field="doc.numero_pedido_cliente"/>
+                                </div>
+                                <div t-if="doc.fecha_entrega" class="col-auto col-3 mw-100 mb-2">
+                                    <strong>Fecha entrega:</strong>
+                                    <p class="m-0" t-field="doc.fecha_entrega"/>
+                                </div>
+                                <div t-if="doc.fecha_confirmacion" class="col-auto col-3 mw-100 mb-2" name="expiration_date">
+                                    <strong>Fecha confirmación:</strong>
+                                    <p class="m-0" t-field="doc.fecha_confirmacion"/>
+                                </div>
+                            </div>
+                            <table class="table table-condensed table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Producto</th>
+                                        <th> g/m²</th>
+                                        <th>Ancho (mm)</th>
+                                        <th> Mand.(mm)</th>
+                                        <th> Diam.Ex.(cm)</th>
+                                        <th>Precio Unitario (€/kg)</th>
+                                        <th> cantidad </th>
+                                        <th>Descuento %</th>
+                                        <th>Impuestos %</th>
+                                        <th>Subtotal</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="doc.sales_compras_line_ids" t-as="line">
+                                        <tr>
+                                            <td>
+                                                <span t-field="line.product_id.name"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="line.gramo_metro"/>
+                                            </td>
+                                           
+                                            <td>
+                                                <span t-field="line.ancho"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="line.mand"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="line.diametro"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="line.precio"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="line.cantidad"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="line.discount"/>
+                                            </td>
+                                            <td>
+                                                <t t-foreach="line.tax_id" t-as="tax">
+                                                    <span t-esc="'{:.2f}'.format(tax.amount)"/>
+                                                </t>
+                                            </td>
+                                            <td>
+                                                <span t-field="line.price_subtotal"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                            <!--<div style="font-size:20px;display: flex;flex-direction: row;flex-wrap: nowrap;justify-content: flex-end;">
+                              <div class="col-xs-4 col-xs-offset-8">
+                                    <table class="table o_base_currency_table">
+                                        <tr>
+                                           
+                                            <td class="text-right">
+                                                <p>Subtotal: <span t-field="doc.amount_untaxed"/>€</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                           
+                                            <td class="text-right">
+                                               <p>Impuestos: <span t-field="doc.amount_tax"/>€</p>
+                                            </td>
+                                        </tr>
+                                        <tr class="border-black o_total">
+                                           
+                                            <td class="text-right">
+                                                <p>Total: <span t-field="doc.amount_total"/>€</p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>-->
+                            <div class="clearfix">
+                                <div id="total" class="row">
+                                    <div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ml-auto">
+                                        <table class="table table-sm" style="page-break-inside: avoid;">
+                                            <tr class="border-black o_subtotal" style="">
+                                                <td>
+                                                    <strong>Subtotal</strong>
+                                                </td>
+                                                <td class="text-right">
+                                                    <span t-field="doc.amount_untaxed"/>
+                                                </td>
+                                            </tr>
+                                            <tr style="">
+                                                <td>
+                                                    Impuestos
+                                                </td>
+                                                <td class="text-right">
+                                                    <span>
+                                                        <t t-esc="'{:.2f}'.format(doc.amount_tax)"/>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr class="border-black o_total">
+                                                <td>
+                                                    <strong>Total</strong>
+                                                </td>
+                                                <td class="text-right">
+                                                    <span class="text-nowrap" t-esc="doc.amount_total"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p t-if="doc.payment_term_id.note">
+                            <span t-field="doc.payment_term_id.note"/>
+                        </p>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
