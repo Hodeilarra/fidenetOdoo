@@ -2,7 +2,7 @@
     <data>
         <!-- DEFINICIONES DE MENUS -->
        
-        <!--FACTURAS-->
+        <!--FACTURASSSSSSSSSSSS-->
         <record model="ir.actions.act_window" id="facturas.action_window">
             <field name="name">Facturas</field>
             <field name="res_model">facturas.invoice</field>
