@@ -7,7 +7,7 @@
             <field name="inherit_id" ref="project.view_task_form2"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='partner_id']" position="after">
-                    <field name="presupuesto"/>
+                    <field name="presupuesto" groups="project.group_project_manager"/>
                     <field name="notas" widget="text" groups="project.group_project_manager"/>
                 </xpath>
                 <xpath expr="//field[@name='date_assign']" position="after">
@@ -37,7 +37,9 @@
                                     <create name="add_note_control" string="Añadir nota" context="{'default_display_type': 'line_note'}"/>
                                 </control>
                                 <field name="display_type" invisible="1"/>
-                                <field name="product_id" attrs="{'required': [('display_type', '=', False)]}"/>
+                                <field name="product_id" attrs="{'required': [('display_type', '=', False)]}" options="{'no_open': True}"/>
+                               
+                                
                                 <field name="display_type" invisible="1"/>
                                 <field name="name" widget="section_and_note_text" optional="show"/>
                                 <field name="display_type" invisible="1"/>
@@ -63,8 +65,7 @@
                 </xpath>
             </field>
         </record>
-
-          <record id="timesheet_view_tree_user_inherit" model="ir.ui.view">
+        <record id="timesheet_view_tree_user_inherit" model="ir.ui.view">
             <field name="name">hr_timesheet.timesheet_view_tree_user.inherit</field>
             <field name="model">account.analytic.line</field>
             <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_search"/>
@@ -85,5 +86,31 @@
                 </xpath>
             </field>
         </record>
+        <!--INTENTAMOS QUE EL GRUPO USUARIO EN EL MODULO DE INVENTARIO SOLO PUEDA VER LOS CAMPOS NOMBRE Y UNIDAD DE MEDIDA EN LA LISTA DE BUSCAR MAS-->
+        <record id="view_product_product_tree_inherit" model="ir.ui.view">
+            <field name="name">product.product.tree.inherit</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_product_tree_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="replace">
+                    <tree string="Product Variants" multi_edit="1" duplicate="false" sample="1">
+                        <field name="default_code" optional="show" readonly="1" />
+                        <field name="barcode" optional="hide" readonly="1" groups="stock.group_stock_manager"/>
+                        <field name="name" readonly="1" />
+                        <field name="product_template_attribute_value_ids" widget="many2many_tags" groups="product.group_product_variant" readonly="1"/>
+                        <field name="company_id" groups="base.group_multi_company" optional="hide" readonly="1" />
+                        <field name="lst_price" optional="show" string="Sales Price" groups="stock.group_stock_manager"/>
+                        <field name="standard_price" optional="show" groups="stock.group_stock_manager"/>
+                        <field name="categ_id" optional="hide" groups="stock.group_stock_manager"/>
+                        <field name="type" optional="hide" readonly="1" groups="stock.group_stock_manager"/>
+                        <field name="price" invisible="not context.get('pricelist',False)" groups="stock.group_stock_manager"/>
+                        <field name="uom_id" options="{'no_open': True, 'no_create': True}" groups="uom.group_uom" optional="show" readonly="1"/>
+                        <field name="product_tmpl_id" invisible="1" readonly="1" groups="stock.group_stock_manager"/>
+                        <field name="active" invisible="1" />
+                    </tree>
+                </xpath>
+            </field>
+        </record>
+        
     </data>
 </odoo>

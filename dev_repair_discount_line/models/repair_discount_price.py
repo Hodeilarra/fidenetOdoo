@@ -20,24 +20,14 @@ class RepairLineDiscount(models.Model):
     amount_total        = fields.Monetary(compute='_compute_price_subtotal', string='Total', store=True)
     amount_tax          = fields.Float(compute='_compute_price_subtotal', string='Tax', store=True)
    
-    @api.depends('discount','price_unit','product_uom_qty')
-    def _compute_price_subtotal(self):
-        print("Precio del producto:"+str(self.price_unit))
-        for line in self:
-            if line.discount > 100:
-                raise ValidationError(_("El descuento debe ser menor que el 100%"))
-            else:
-                #line.price_unit = line.product_price
-                 
-                line.price_unit = line.price_unit * (1 - (line.discount or 0.0) / 100.0)
-                #line.price_unit = precio_descontado
-                taxes = line.tax_id.compute_all(line.price_unit, line.repair_id.currency_id, line.product_uom_qty, product=line.product_id)
-                line.update({
-                    'amount_tax': sum(t.get('amount', 0.0) for t in taxes.get('taxes', [])),
-                    'amount_total': taxes['total_included'],
-                    'price_subtotal': taxes['total_excluded'],
-                })
+    @api.onchange('product_uom_qty', 'discount', 'price_unit')
+    def _onchange_calculate_discount_and_taxes(self):
+        if self.discount:
+            self.price_unit = self.price_unit * (1 - (self.discount / 100))
 
+        # Una vez aplicado el descuento, los impuestos se calcularán automáticamente basándose en el price_unit actualizado
+        # Suponiendo que los impuestos ya están configurados correctamente en el producto
+        
 
 
 

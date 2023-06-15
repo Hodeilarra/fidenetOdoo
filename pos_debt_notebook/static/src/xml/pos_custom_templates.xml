@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="ActionpadWidget_inherit" inherit_id="point_of_sale.ActionpadWidget">
+            <xpath expr="//t[t-att-class=&quot;{'decentered': isLongName}&quot;]/t[t-if=&quot;client&quot;]" position="inside">
+                <t t-if="client.debt">
+                    <div t-esc="client.debt"/>
+                </t>
+            </xpath>
+        </template>
+    </data>
+</odoo>

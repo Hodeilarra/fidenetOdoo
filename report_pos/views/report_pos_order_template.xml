@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_pos_order_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page" style="width:80mm;">
+                        <!-- Información de la empresa -->
+                        <h2>Nombre de la Empresa</h2>
+                        <p>Dirección de la empresa</p>
+                        <p>Número de teléfono</p>
+                        <!-- Número y fecha de la factura -->
+                        <h3>Número de ticket:
+                            <span t-field="o.name"/>
+                        </h3>
+                        <h3>Fecha:
+                            <span t-field="o.date_order" t-options='{"widget": "date"}'/>
+                        </h3>
+                        <!-- Detalles de los productos -->
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>Producto</th>
+                                    <th>Cantidad</th>
+                                    <th>Precio unitario</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="o.lines" t-as="line">
+                                    <td>
+                                        <span t-field="line.full_product_name"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="line.qty"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="line.price_unit" t-options='{"widget": "monetary"}'/>
+                                    </td>
+                                    <td>
+                                        <span t-field="line.price_subtotal_incl" t-options='{"widget": "monetary"}'/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- Subtotal -->
+                        <!--<p>Subtotal:
+                            <span t-esc="sum(line.price_subtotal_incl for line in o.lines)"/>
+                           <span t-field="o.company_id.currency_id.name" t-options="{&quot;widget&quot;: &quot;text&quot;}"/>
+                        </p>-->
+                        <!-- IVA -->
+                        <t t-set="taxes" t-value="o.lines.mapped('tax_ids')"/>
+                        <t t-foreach="taxes" t-as="tax">
+                            <p>
+                                <t t-esc="tax.name"/>
+                            </p>
+                        </t>
+                        <p>
+                            Impuestos totales:
+                            <span t-field="o.amount_tax"/>€
+                        </p>
+                        <p>
+                            Subtotal:
+                            <span t-esc="sum(line.price_subtotal for line in o.lines)"/>€
+                        </p>
+                        <p>
+                            TOTAL:
+                            <span t-field="o.amount_total"/>€
+                        </p>
+                        <!-- Información de los pagos -->
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>Método de pago</th>
+                                    <th>Cantidad pagada</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="o.payment_ids" t-as="payment" t-if="payment.amount > 0">
+                                    <td>
+                                        <span t-field="payment.payment_method_id.name"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="payment.amount" t-options='{"widget": "monetary"}'/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- Cambio -->
+                        <p>Cambio:
+                            <span t-field="o.amount_return" t-options='{"widget": "monetary"}'/>
+                        </p>
+                        <p>Eskerrik asko</p>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

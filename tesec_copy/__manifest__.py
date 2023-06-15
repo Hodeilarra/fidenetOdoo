@@ -17,7 +17,8 @@ Project Task Create a Sale Order
                 'project',
                 'sale',
                 'account',
-                'base'
+                'base',
+                'product'
                 ],
     'data':[
         'security/ir.model.access.csv',

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record id="barcode_string_separator" model="ir.config_parameter">
+            <field name="key">custom_stock_barcode.string_separator</field>
+            <field name="value">;</field>
+        </record>
+        <record id="barcode_position_barcode" model="ir.config_parameter">
+            <field name="key">custom_stock_barcode.position_barcode</field>
+            <field name="value">0</field>
+        </record>
+        <record id="barcode_position_serial_number" model="ir.config_parameter">
+            <field name="key">custom_stock_barcode.position_serial_number</field>
+            <field name="value">1</field>
+        </record>
+        <record id="barcode_position_mac" model="ir.config_parameter">
+            <field name="key">custom_stock_barcode.position_mac</field>
+            <field name="value">9</field>
+        </record>
+        <record id="barcode_lotname_structure" model="ir.config_parameter">
+            <field name="key">custom_stock_barcode.lot_name_structure</field>
+            <field name="value">%s-%s</field>
+        </record>
+        <record id="barcode_qr_length" model="ir.config_parameter">
+            <field name="key">custom_stock_barcode.qr_length</field>
+            <field name="value">16</field>
+        </record>
+    </data>
+</odoo>

@@ -14,5 +14,5 @@ class SaleOrderProforma(models.Model):
         res = super(SaleOrderProforma, self).default_get(fields_list)
         print(str(self.env.context.get('from_proforma_view')))
         if self.env.context.get('from_proforma_view'):
-            res['type_id'] = 2
+            res['type_id'] = 3
         return res

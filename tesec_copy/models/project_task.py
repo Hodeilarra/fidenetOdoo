@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*
 
-from odoo import models, fields, api , _
+from odoo import models, fields, api , exceptions, _
 from odoo.exceptions import UserError, ValidationError
 from datetime import datetime, time
 
@@ -53,7 +53,7 @@ class ProjectTask(models.Model):
     presupuesto = fields.Many2one('sale.order', string="Presupuesto")
     notas = fields.Char(string="Notas")
     fecha_creacion = fields.Date(string='Fecha de ejecución')
-    
+
     @api.model
     def create(self, vals):
             # Reemplaza los guiones con barras.
@@ -72,111 +72,86 @@ class ProjectTask(models.Model):
         except ValueError:
             raise ValidationError("El formato del título debe ser dd-mm-yyyy o dd-mm-yy")
 
-    
+   
+    def unlink(self):
+        if not self.env.user.has_group('project.group_project_manager'):
+            raise exceptions.UserError(_("Solo los gerentes de proyecto pueden eliminar tareas."))
+        return super(ProjectTask, self).unlink()
+
     def write(self, vals):
-    # Reemplaza los guiones con barras.
-        if 'name' in vals:
-            try:
-                name = vals.get('name').replace('-', '/')
-                parts = name.split('/')
-                if len(parts[-1]) == 2:
-                    parts[-1] = '20' + parts[-1]
-                    name = '/'.join(parts)
-                fecha_creacion = datetime.strptime(name, "%d/%m/%Y").date()
-                vals['fecha_creacion'] = fecha_creacion
-            except ValueError:
-                raise ValidationError("El formato del título debe ser dd-mm-yyyy o dd-mm-yy")
+        if 'active' in vals or 'unlink' in vals:
+            if not (self.env.user.has_group('project.group_project_manager') or self.env.user.has_group('project.group_project_admin')):
+                raise exceptions.UserError(_("Solo los administradores y gerentes de proyecto pueden archivar o eliminar tareas."))
+        else:
+            if 'name' in vals:
+                try:
+                    name = vals.get('name').replace('-', '/')
+                    parts = name.split('/')
+                    if len(parts[-1]) == 2:
+                        parts[-1] = '20' + parts[-1]
+                        name = '/'.join(parts)
+                    fecha_creacion = datetime.strptime(name, "%d/%m/%Y").date()
+                    vals['fecha_creacion'] = fecha_creacion
+                except ValueError:
+                    raise ValidationError("El formato del título debe ser dd-mm-yyyy o dd-mm-yy")
 
         return super(ProjectTask, self).write(vals)
         
     
 
     def action_create_sale(self):
-        if(not self.project_id.presupuesto.id):
-            now = datetime.now()
-            dt_string = now.strftime("%Y-%m-%d %H:%M:%S")
-            sale_id = self.env['sale.order'].create(    
-				{'partner_id': self.partner_id.id,
-				'task_id': self.id,
-                'project_id': self.project_id.id,     
-				'date_order': dt_string,
-                'nombreObra': self.project_id.name,      
-				'picking_policy': 'direct',
-                'type_id': 3
-				})
-            self.project_id.presupuesto = sale_id
-        if(not self.presupuesto.id):
-            self.env['sale.order.line'].create({
-                            'display_type': 'line_section',
-                            'name': self.name,
-                            'order_id': self.project_id.presupuesto.id,
-                            
-                        })
-            for product in self.custom_invoice_line_ids :
-                productV = product.product_id
-                if not productV:
-                    valorDisplay = dict(product._fields['display_type'].selection).get(product.display_type)
-                    if(str(valorDisplay)=='Section'):
-                        self.env['sale.order.line'].create({
-                            'display_type': 'line_section',
-                            'name': product.name,
-                            'order_id': self.project_id.presupuesto.id
-                        })
-                    else:
-                        self.env['sale.order.line'].create({
-                            'display_type': 'line_note',
-                            'name': product.name,
-                            'order_id': self.project_id.presupuesto.id
-                        })
-                else:
-                    self.env['sale.order.line'].create({  
-                                'product_id': productV.id,
-                                'name': productV.display_name or " ",
-                                'product_uom_qty': product.quantity,
-                                'product_uom': product.product_uom.id,
-                                'order_id': self.project_id.presupuesto.id
-                            })
-            self.presupuesto = self.project_id.presupuesto
-        else:
-            #Actualizar lista
-            sale = self.env['sale.order'].search([('id', '=', self.presupuesto.id)])
-            saleorderline = self.env['sale.order.line'].search([('order_id', '=', sale.id)])
-            for product in saleorderline:
-                product.unlink()
+        now = datetime.now()
+        dt_string = now.strftime("%Y-%m-%d %H:%M:%S")
 
-            project = self.env['project.project'].search([('id', '=', self.project_id.id)])
-            for task in reversed(project.task_ids):
-                self.env['sale.order.line'].create({
-                            'display_type': 'line_section',
-                            'name': task.name,
-                            'order_id': task.project_id.presupuesto.id
-                        })
-                for product in task.custom_invoice_line_ids :
-                    productV = product.product_id
-                    if not productV:
-                        valorDisplay = dict(product._fields['display_type'].selection).get(product.display_type)
-                        if(str(valorDisplay)=='Section'):
-                            self.env['sale.order.line'].create({
-                                'display_type': 'line_section',
-                                'name': product.name,
-                                'order_id': task.project_id.presupuesto.id
-                            })
-                        else:
-                            self.env['sale.order.line'].create({
-                                'display_type': 'line_note',
-                                'name': product.name,
-                                'order_id': task.project_id.presupuesto.id
-                            })
-                    else:
-                        self.env['sale.order.line'].create({  
-                                'product_id': productV.id,
-                                'name': product.name or " ",
-                                'product_uom_qty': product.quantity,          
-                                'order_id': task.project_id.presupuesto.id
-                            })
+        # Si la tarea no tiene una proforma asociada o si la proforma asociada está confirmada, crea una nueva proforma.
+        if not self.presupuesto or self.presupuesto.state == 'sale':
+            sale_id = self.env['sale.order'].create({    
+                'partner_id': self.partner_id.id,
+                'task_id': self.id,
+                'project_id': self.project_id.id,     
+                'date_order': dt_string,
+                'nombreObra': self.project_id.name,      
+                'picking_policy': 'direct',
+                'type_id': 3
+            })
+            self.presupuesto = sale_id
+
+        # Elimina las líneas de la proforma existente.
+        self.presupuesto.order_line.unlink()
+
+        # Crea las líneas de la proforma para la tarea actual.
+        self.env['sale.order.line'].create({
+            'display_type': 'line_section',
+            'name': self.name,
+            'order_id': self.presupuesto.id,                    
+        })
+        for product in self.custom_invoice_line_ids :
+            productV = product.product_id
+            if not productV:
+                valorDisplay = dict(product._fields['display_type'].selection).get(product.display_type)
+                if(str(valorDisplay)=='Section'):
+                    self.env['sale.order.line'].create({
+                        'display_type': 'line_section',
+                        'name': product.name,
+                        'order_id': self.presupuesto.id
+                    })
+                else:
+                    self.env['sale.order.line'].create({
+                        'display_type': 'line_note',
+                        'name': product.name,
+                        'order_id': self.presupuesto.id
+                    })
+            else:
+                self.env['sale.order.line'].create({  
+                    'product_id': productV.id,
+                    'name': productV.display_name or " ",
+                    'product_uom_qty': product.quantity,
+                    'product_uom': product.product_uom.id,
+                    'order_id': self.presupuesto.id
+                })
 
         return self
-        
+
     
     def show_invoice_custom(self):
         self.ensure_one()

@@ -1,0 +1,64 @@
+<odoo>
+  <data>
+      <template id="report_ticket_producto">
+        <t t-name="product.report_simple_label">
+        <t t-foreach="docs" t-as="product">
+        <main>
+        <div style="width: 100%; display: inline-table; height:14rem;">
+            <table class="table table-bordered mb-0" style="border: 2px solid black;">
+                <tr>
+                    <th class="table-active text-left" style="height: 4rem;">
+                        <strong t-field="product.display_name"/>
+                    </th>
+                </tr>
+                <tr>
+                    <td style="height: 2rem">
+                        <strong>Precio:</strong>
+                        <strong t-field="product.lst_price" t-options="{'widget': 'monetary', 'display_currency': product.company_id.currency_id}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center align-middle" style="height: 3rem">
+                        <t t-if="product.barcode">
+                           <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', product.barcode, 600, 100)" style="width:300px;height:50px;" alt="Barcode"/>
+                           
+                          <p style="display: flex;flex-direction: column;align-items: center;text-align: center;"><span t-field="product.barcode"/></p>
+                        </t>
+                        <t t-else=""><span class="text-muted">No barcode available</span></t>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        </main>
+        </t>
+        </t>
+    </template>
+
+
+        <record id="paperformat_ticket" model="report.paperformat">
+            <field name="name">Papel Térmico</field>
+            <field name="default" eval="False"/>
+            <field name="format">custom</field>
+            <field name="page_height">297</field>
+            <field name="page_width">79</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">10</field>
+            <field name="margin_bottom">20</field>
+            <field name="margin_left">3</field>
+            <field name="margin_right">3</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">15</field>
+            <field name="dpi">95</field>
+        </record>
+
+        <report
+            id="action_report_product_ticket"
+            model="product.template"
+            string="Ticket de Producto"
+            report_type="qweb-pdf"
+            paperformat="report_ticket_producto.paperformat_ticket"
+            name="report_ticket_producto.report_ticket_producto"
+            file="report_ticket_producto.report_ticket_producto"
+        />
+  </data>
+</odoo>

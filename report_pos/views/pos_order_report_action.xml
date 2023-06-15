@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   <data>
+   <!--     <record id="action_report_pos_order" model="ir.actions.report">
+            <field name="name">POS Order Report</field>
+            <field name="model">pos.order</field>
+            <field name="report_name">report_pos.report_pos_order_template</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="binding_model_id" ref="point_of_sale.model_pos_order"/>
+        </record>-->
+        
+    </data>
+</odoo>

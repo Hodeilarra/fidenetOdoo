@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="report_pos_order_simplified" model="ir.actions.report">
+            <field name="name">Simplified Invoice</field>
+            <field name="model">pos.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">pos_warning.report_pos_order_simplified</field>
+            <field name="print_report_name">'Simplified Invoice - %s' % (object.name)</field>
+        </record>
+        <template id="report_pos_order_simplified_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <h2>Factura Simplificada:
+                            <span t-field="o.name"/>
+                        </h2>
+                        <p>Fecha:
+                            <span t-field="o.date_order"/>
+                        </p>
+                        <table>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Precio</th>
+                            </tr>
+                            <t t-foreach="o.lines" t-as="line">
+                                <tr>
+                                    <td>
+                                        <span t-field="line.product_id.display_name"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="line.qty"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="line.price_subtotal_incl"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </table>
+                        <p>Total:
+                            <span t-field="o.amount_total"/>
+                        </p>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
