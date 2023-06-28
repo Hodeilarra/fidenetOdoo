@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--CAMBIAMOS EL COLOR DEL ESTADO PENDIENTE/DRAFT-->
+    <record id="view_quotation_tree_inherit" model="ir.ui.view">
+        <field name="name">sale.order.tree.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='state']" position="attributes">
+                <attribute name="decoration-success">state == 'sale' or state == 'done'</attribute>
+                <attribute name="decoration-warning">state == 'draft'</attribute>
+                <attribute name="decoration-info">state == 'sent'</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='create_date']" position="after">
+                <field name="fecha_envio"/>
+                <field name="administrador_finca"/>
+                <field name="comercial_obra"/>
+                 <field name="obra_asociada"/>
+
+            </xpath>
+
+            <xpath expr="//field[@name='user_id']" position="replace">
+
+                <field name="user_id" string="Técnico"/>
+            </xpath>
+
+        </field>
+    </record>
+
+    <!--AÑADIMOS CAMPO FECHA ENVIO-->
+    <record id="view_order_form_inherit" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date_order']" position="after">
+                <field name="fecha_envio"/>
+            </xpath>
+        </field>
+    </record>
+
+
+
+    <!--AÑADIMOS BOTÓN DE CREAR VARIANTE DE PRESUPUESTO y ADMIN FINCA-->
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="variant_number" invisible="1"/>
+                <field name="is_variant" invisible="1"/>
+            </xpath>
+            <xpath expr="//header/button[@name='action_confirm']" position="before">
+                <button name="create_variant" string="Añadir variante" type="object" attrs="{'invisible': [('is_variant', '=', True)]}"/>
+            </xpath>
+
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="administrador_finca"/>
+                <field name="comercial_obra"/>
+                 <field name="obra_asociada" />
+
+            </xpath>
+        </field>
+    </record>
+
+
+
+</odoo>
