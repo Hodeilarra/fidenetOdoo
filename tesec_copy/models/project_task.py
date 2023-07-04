@@ -54,6 +54,14 @@ class ProjectTask(models.Model):
     notas = fields.Char(string="Notas")
     fecha_creacion = fields.Date(string='Fecha de ejecución')
 
+    @api.returns('self', lambda value: value.id)
+    def copy(self, default=None):
+        default = dict(default or {})
+        if 'name' not in default:
+            original_name = self.name
+            default['name'] = original_name.rstrip(" (copia)")
+        return super(ProjectTask, self).copy(default=default)
+
     @api.model
     def create(self, vals):
             # Reemplaza los guiones con barras.

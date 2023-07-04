@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+          <template id="report_invoice_document_invoice_date" inherit_id="account.report_invoice_document">
+            <xpath expr="//div[@name='invoice_date']" position="replace"/>
+        </template>
+
+        <!-- Target the due date field and replace it -->
+        <template id="report_invoice_document_due_date" inherit_id="account.report_invoice_document">
+            <xpath expr="//div[@name='due_date']" position="replace"/>
+        </template>
+    </data>
+</odoo>

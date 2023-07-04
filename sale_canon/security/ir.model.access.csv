@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_canon_lpi_user,canon.lpi.user,model_canon_lpi,base.group_user,1,0,0,0
+access_canon_lpi_manager,canon.lpi.manager,model_canon_lpi,sales_team.group_sale_manager,1,1,1,1

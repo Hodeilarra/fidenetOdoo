@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="True">
+    <record id="canon_lpi_c_print_multi" model="canon.lpi">
+        <field name="name">Canon LPI Impresoras multifunción</field>
+        <field name="amount" eval="5.25"/>
+    </record>
+    <record id="canon_lpi_c_print_mono" model="canon.lpi">
+        <field name="name">Canon LPI Impresoras monofunción</field>
+        <field name="amount" eval="4.5"/>
+    </record>
+    <record id="canon_lpi_c_disc_burner" model="canon.lpi">
+        <field name="name">Canon LPI Grabadoras de discos</field>
+        <field name="amount" eval="0.33"/>
+    </record>
+    <record id="canon_lpi_c_disc_burner_other" model="canon.lpi">
+        <field name="name">Canon LPI Grabadoras de discos "versátiles específicos o mixtos"</field>
+        <field name="amount" eval="1.86"/>
+    </record>
+    <record id="canon_lpi_c_no_rewritable" model="canon.lpi">
+        <field name="name">Canon LPI Discos no regrabables</field>
+        <field name="amount" eval="0.08"/>
+    </record>
+    <record id="canon_lpi_c_rewritable" model="canon.lpi">
+        <field name="name">Canon LPI Discos regrabables</field>
+        <field name="amount" eval="0.10"/>
+    </record>
+    <record id="canon_lpi_c_versatile_no_writable" model="canon.lpi">
+        <field name="name">Canon LPI Discos versátiles no regrabables</field>
+        <field name="amount" eval="0.21"/>
+    </record>
+    <record id="canon_lpi_c_versatile_writable" model="canon.lpi">
+        <field name="name">Canon LPI Discos versátiles regrabables</field>
+        <field name="amount" eval="0.28"/>
+    </record>
+    <record id="canon_lpi_c_usb_mem" model="canon.lpi">
+        <field name="name">Canon LPI Memorias USB y tarjetas de memoria</field>
+        <field name="amount" eval="0.24"/>
+    </record>
+    <record id="canon_lpi_c_external_drive" model="canon.lpi">
+        <field name="name">Canon LPI Discos duros externos</field>
+        <field name="amount" eval="6.45"/>
+    </record>
+    <record id="canon_lpi_c_internal_drive" model="canon.lpi">
+        <field name="name">Canon LPI Discos duros integrados</field>
+        <field name="amount" eval="5.45"/>
+    </record>
+    <record id="canon_lpi_c_tablets" model="canon.lpi">
+        <field name="name">Canon LPI Tablets y dispositivos portátiles de pantalla táctil</field>
+        <field name="amount" eval="3.15"/>
+    </record>
+    <record id="canon_lpi_c_moviles" model="canon.lpi">
+        <field name="name">Canon LPI Móviles</field>
+        <field name="amount" eval="1.10"/>
+    </record>
+    <record id="canon_lpi_c_print_multi_p" model="canon.lpi">
+        <field name="name">Canon LPI Impresoras multifunción</field>
+        <field name="amount" eval="5.25"/>
+    </record>
+    <record id="canon_lpi_c_print_mono_p" model="canon.lpi">
+        <field name="name">Canon LPI Impresoras monofunción</field>
+        <field name="amount" eval="4.5"/>
+    </record>
+    <record id="canon_lpi_c_disc_burner_p" model="canon.lpi">
+        <field name="name">Canon LPI Grabadoras de discos</field>
+        <field name="amount" eval="0.33"/>
+    </record>
+    <record id="canon_lpi_c_disc_burner_other_p" model="canon.lpi">
+        <field name="name">Canon LPI Grabadoras de discos "versátiles específicos o mixtos"</field>
+        <field name="amount" eval="1.86"/>
+    </record>
+    <record id="canon_lpi_c_no_rewritable_p" model="canon.lpi">
+        <field name="name">Canon LPI Discos no regrabables</field>
+        <field name="amount" eval="0.08"/>
+    </record>
+    <record id="canon_lpi_c_rewritable_p" model="canon.lpi">
+        <field name="name">Canon LPI Discos regrabables</field>
+        <field name="amount" eval="0.10"/>
+    </record>
+    <record id="canon_lpi_c_versatile_no_writable_p" model="canon.lpi">
+        <field name="name">Canon LPI Discos versátiles no regrabables</field>
+        <field name="amount" eval="0.21"/>
+    </record>
+    <record id="canon_lpi_c_versatile_writable_p" model="canon.lpi">
+        <field name="name">Canon LPI Discos versátiles regrabables</field>
+        <field name="amount" eval="0.28"/>
+    </record>
+    <record id="canon_lpi_c_usb_mem_p" model="canon.lpi">
+        <field name="name">Canon LPI Memorias USB y tarjetas de memoria</field>
+        <field name="amount" eval="0.24"/>
+    </record>
+    <record id="canon_lpi_c_external_drive_p" model="canon.lpi">
+        <field name="name">Canon LPI Discos duros externos</field>
+        <field name="amount" eval="6.45"/>
+    </record>
+    <record id="canon_lpi_c_internal_drive_p" model="canon.lpi">
+        <field name="name">Canon LPI Discos duros integrados</field>
+        <field name="amount" eval="5.45"/>
+    </record>
+    <record id="canon_lpi_c_tablets_p" model="canon.lpi">
+        <field name="name">Canon LPI Tablets y dispositivos portátiles de pantalla táctil</field>
+        <field name="amount" eval="3.15"/>
+    </record>
+    <record id="canon_lpi_c_moviles_p" model="canon.lpi">
+        <field name="name">Canon LPI Móviles</field>
+        <field name="amount" eval="1.10"/>
+    </record>
+</odoo>

@@ -6,11 +6,10 @@
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
-
                 <xpath expr="//field[@name='partner_id']" position="after">
                     <field name="project_id" options="{'no_create':False}"/>
+                    <field name="task_id" readonly="True"/>
                 </xpath>
-                
             </field>
         </record>
         
@@ -26,20 +25,17 @@
                 
             </field>
         </record>-->
-
-
-       <record id="view_sale_order_tree_inherit" model="ir.ui.view">
-                <field name="name">sale.order.tree.inherit</field>
-                <field name="model">sale.order</field>
-                <field name="inherit_id" ref="sale.view_quotation_tree"/>
-                <field name="arch" type="xml">
-                    <xpath expr="//field[@name='partner_id']" position="after">
+        <record id="view_sale_order_tree_inherit" model="ir.ui.view">
+            <field name="name">sale.order.tree.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
                     <field name="client_order_ref" string="Referencia de obra"/>
                 </xpath>
-                </field>
-            </record>
-
-            <!--<record model="ir.ui.view" id="view_sale_order_form_notas">
+            </field>
+        </record>
+        <!--<record model="ir.ui.view" id="view_sale_order_form_notas">
                 <field name="name">sale.order.form.notas</field>
                 <field name="model">sale.order</field>
                 <field name="inherit_id" ref="sale.view_order_form"/>
@@ -49,8 +45,5 @@
                     </xpath>
                 </field>
             </record>-->
-
-
     </data>
 </odoo>
- 

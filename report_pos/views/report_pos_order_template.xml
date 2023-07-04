@@ -4,20 +4,51 @@
         <template id="report_pos_order_template">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="o">
-                    <div class="page" style="width:80mm;">
+                    <style>
+                body {
+                    margin-top: 0;
+                    padding-top: 0;
+                }
+                    </style>
+                    <div class="page" style="width:80mm; font-size:12px;">
                         <!-- Información de la empresa -->
-                        <h2>Nombre de la Empresa</h2>
-                        <p>Dirección de la empresa</p>
-                        <p>Número de teléfono</p>
-                        <!-- Número y fecha de la factura -->
-                        <h3>Número de ticket:
-                            <span t-field="o.name"/>
-                        </h3>
-                        <h3>Fecha:
-                            <span t-field="o.date_order" t-options='{"widget": "date"}'/>
-                        </h3>
+                        <span t-field="o.company_id.name"/>
+                        <br/>
+                            CIF/NIF:
+                        <span t-field="o.company_id.vat"/>
+                            Telefono:
+                        <span t-field="o.company_id.phone"/>
+                        <br/>
+                        <span t-field="o.company_id.street"/>
+                        <br/>
+                        <span t-field="o.company_id.zip"/>
+                        <span t-field="o.company_id.city"/>
+                        <br/>
+                        <br/>
+                        <br/>                            User:
+                        <span t-field="o.user_id"/>
+                        <br/>
+                        <br/>
+                        <span style="text-align:center; display:block;"> DUPLICAR </span>
+                        <br/>
+                        <br/>
+                       Fecha:
+                        <span t-field="o.date_order" />
+                        <br/>                        Cliente:
+                        <span t-field="o.partner_id.name"/>
+                        <br/>                        CIF/NIF:
+                        <span t-field="o.partner_id.vat"/>
+                        <br/>
+                        <span t-field="o.partner_id.street"/>
+                        <span t-field="o.partner_id.city"/>
+                        <span t-field="o.partner_id.state_id.name"/>
+                        <span t-field="o.partner_id.country_id.name"/>
+                        <span t-field="o.partner_id.zip"/>
+                        <br/>
+                        <br/>
+                        <br/>
                         <!-- Detalles de los productos -->
-                        <table class="table table-condensed">
+                        <table class="table table-condensed" style="font-size:12px;">
                             <thead>
                                 <tr>
                                     <th>Producto</th>
@@ -57,18 +88,21 @@
                         </t>
                         <p>
                             Impuestos totales:
-                            <span t-field="o.amount_tax"/>€
+                            <span t-field="o.amount_tax"/>
+€
                         </p>
                         <p>
                             Subtotal:
-                            <span t-esc="sum(line.price_subtotal for line in o.lines)"/>€
+                            <span t-esc="sum(line.price_subtotal for line in o.lines)"/>
+€
                         </p>
                         <p>
                             TOTAL:
-                            <span t-field="o.amount_total"/>€
+                            <span t-field="o.amount_total"/>
+€
                         </p>
                         <!-- Información de los pagos -->
-                        <table class="table table-condensed">
+                        <table class="table table-condensed" style="font-size:12px;">
                             <thead>
                                 <tr>
                                     <th>Método de pago</th>
@@ -91,6 +125,14 @@
                             <span t-field="o.amount_return" t-options='{"widget": "monetary"}'/>
                         </p>
                         <p>Eskerrik asko</p>
+                    </div>
+                    <div id="ticketbai" style="padding-top:50px; font-size:10px;" t-if="o.has_attribute('tbai_enabled') and o.tbai_enabled and o.has_attribute('tbai_invoice_id') and o.tbai_invoice_id.tbai_identifier and o.tbai_invoice_id.qr">
+                        <ul id="tbai_identifier">
+                            <strong  t-field="o.tbai_invoice_id.tbai_identifier"/>
+                        </ul>
+                        <ul id="tbai_qr" class="list-inline mb4">
+                            <img t-att-src="'data:image/png;base64,%s' % to_text(o.tbai_invoice_id.qr)" style="min-width: 20mm; max-width: 30mm"/>
+                        </ul>
                     </div>
                 </t>
             </t>

@@ -16,6 +16,8 @@
                     <field name="partner_id" readonly="1"/>
                     <field name="client_order_ref" string="Referencia obra"/>
                     <field name="project_id"/>
+                    <field name="task_name"/>
+                    <field name="fecha_creacion_tarea"/>
                     <field name="user_id" optional="show" widget="many2one_avatar_user"/>
                     <field name="activity_ids" widget="list_activity" optional="show"/>
                     <field name="team_id" optional="hide"/>
@@ -30,11 +32,23 @@
                 </tree>
             </field>
         </record>
+        <record id="view_sale_order_pro_search" model="ir.ui.view">
+            <field name="name">sale.order.pro.search</field>
+            <field name="model">sale.order</field>
+            <field name="arch" type="xml">
+                <search string="Presupuesto">
+                    <filter string="Fecha ejecución tarea" name="group_by_fecha_creacion_tarea" domain="[]" context="{'group_by': 'fecha_creacion_tarea'}"/>
+                    <filter string="Cliente" name="group_by_cliente" domain="[]" context="{'group_by': 'partner_id'}"/>
+                    <filter string="Comercial" name="group_by_comercial" domain="[]" context="{'group_by': 'user_id'}"/>
+                </search>
+            </field>
+        </record>
         <record id="action_sale_proformas" model="ir.actions.act_window">
             <field name="name">Proformas</field>
             <field name="res_model">sale.order</field>
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="view_sale_order_proforma_tree"/>
+            <field name="search_view_id" ref="view_sale_order_pro_search"/>
             <field name="domain">[('type_id', '=', 3)]</field>
             <field name="context">{'from_proforma_view': True}</field>
         </record>
@@ -51,8 +65,10 @@
                     <field name="commitment_date" optional="hide"/>
                     <field name="expected_date" optional="hide"/>
                     <field name="partner_id" readonly="1"/>
-                     <field name="client_order_ref" string="Referencia obra"/>
+                    <field name="client_order_ref" string="Referencia obra"/>
                     <field name="project_id"/>
+                    <field name="task_name"/>
+                    <field name="fecha_creacion_tarea"/>
                     <field name="user_id" optional="show" widget="many2one_avatar_user"/>
                     <field name="activity_ids" widget="list_activity" optional="show"/>
                     <field name="team_id" optional="hide"/>
@@ -67,11 +83,23 @@
                 </tree>
             </field>
         </record>
+        <record id="view_sale_order_pre_search" model="ir.ui.view">
+            <field name="name">sale.order.pre.search</field>
+            <field name="model">sale.order</field>
+            <field name="arch" type="xml">
+                <search string="Presupuesto">
+                    <filter string="Fecha ejecución tarea" name="group_by_fecha_creacion_tarea" domain="[]" context="{'group_by': 'fecha_creacion_tarea'}"/>
+                    <filter string="Cliente" name="group_by_cliente" domain="[]" context="{'group_by': 'partner_id'}"/>
+                    <filter string="Comercial" name="group_by_comercial" domain="[]" context="{'group_by': 'user_id'}"/>
+                </search>
+            </field>
+        </record>
         <record id="action_sale_presupuestos" model="ir.actions.act_window">
             <field name="name">Presupuestos</field>
             <field name="res_model">sale.order</field>
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="view_sale_order_tree"/>
+            <field name="search_view_id" ref="view_sale_order_pre_search"/>
             <field name="domain">[('type_id', '!=', 3)]</field>
             <field name="context">{}</field>
         </record>
@@ -90,6 +118,8 @@
                     <field name="partner_id" readonly="1"/>
                     <field name="client_order_ref" string="Referencia obra"/>
                     <field name="project_id"/>
+                    <field name="task_name"/>
+                    <field name="fecha_creacion_tarea"/>
                     <field name="user_id" optional="show" widget="many2one_avatar_user"/>
                     <field name="activity_ids" widget="list_activity" optional="show"/>
                     <field name="team_id" optional="hide"/>
@@ -104,11 +134,23 @@
                 </tree>
             </field>
         </record>
+        <record id="view_sale_order_pre_pro_search" model="ir.ui.view">
+            <field name="name">sale.order.pre.pro.search</field>
+            <field name="model">sale.order</field>
+            <field name="arch" type="xml">
+                <search string="Presupuesto">
+                    <filter string="Fecha ejecución tarea" name="group_by_fecha_creacion_tarea" domain="[]" context="{'group_by': 'fecha_creacion_tarea'}"/>
+                    <filter string="Cliente" name="group_by_cliente" domain="[]" context="{'group_by': 'partner_id'}"/>
+                    <filter string="Comercial" name="group_by_comercial" domain="[]" context="{'group_by': 'user_id'}"/>
+                </search>
+            </field>
+        </record>
         <record id="action_sale_pre_pro" model="ir.actions.act_window">
             <field name="name">PRE/PRO</field>
             <field name="res_model">sale.order</field>
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="view_sale_order_pre_pro_tree"/>
+            <field name="search_view_id" ref="view_sale_order_pre_pro_search"/>
         </record>
         <!--ACEPTADOS-->
         <record id="view_sale_order_acepted_tree" model="ir.ui.view">
@@ -123,8 +165,10 @@
                     <field name="commitment_date" optional="hide"/>
                     <field name="expected_date" optional="hide"/>
                     <field name="partner_id" readonly="1"/>
-                     <field name="client_order_ref" string="Referencia obra"/>
+                    <field name="client_order_ref" string="Referencia obra"/>
                     <field name="project_id"/>
+                    <field name="task_name"/>
+                    <field name="fecha_creacion_tarea"/>
                     <field name="user_id" optional="show" widget="many2one_avatar_user"/>
                     <field name="activity_ids" widget="list_activity" optional="show"/>
                     <field name="team_id" optional="hide"/>
@@ -139,11 +183,23 @@
                 </tree>
             </field>
         </record>
+        <record id="view_sale_order_acepted_search" model="ir.ui.view">
+            <field name="name">sale.order.acepted.search</field>
+            <field name="model">sale.order</field>
+            <field name="arch" type="xml">
+                <search string="Presupuesto">
+                    <filter string="Fecha ejecución tarea" name="group_by_fecha_creacion_tarea" domain="[]" context="{'group_by': 'fecha_creacion_tarea'}"/>
+                    <filter string="Cliente" name="group_by_cliente" domain="[]" context="{'group_by': 'partner_id'}"/>
+                    <filter string="Comercial" name="group_by_comercial" domain="[]" context="{'group_by': 'user_id'}"/>
+                </search>
+            </field>
+        </record>
         <record id="action_sale_acepted" model="ir.actions.act_window">
             <field name="name">Confirmados</field>
             <field name="res_model">sale.order</field>
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="view_sale_order_acepted_tree"/>
+            <field name="search_view_id" ref="view_sale_order_acepted_search"/>
             <field name="domain">[('state', '=', 'sale')]</field>
         </record>
         <record id="sale.menu_sale_quotations" model="ir.ui.menu">
@@ -173,16 +229,11 @@
           sequence="4"
           action="action_sale_acepted"/>
     </data>
-
     <!--MODIFICAMOS EL SEQUENCE DE LOS MENÚS QUE EXISTEN-->
-
-    
-
     <record id="sale.report_sales_team" model="ir.ui.menu">
-            <field name="sequence" eval="6"/>
-        </record>
-
-          <record id="sale.res_partner_menu" model="ir.ui.menu">
-            <field name="sequence" eval="7"/>
-        </record>
+        <field name="sequence" eval="6"/>
+    </record>
+    <record id="sale.res_partner_menu" model="ir.ui.menu">
+        <field name="sequence" eval="7"/>
+    </record>
 </odoo>

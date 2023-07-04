@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+       <template id="report_invoice_document_inherit" inherit_id="account.report_invoice_document">
+            
+            <xpath expr="//div[@name='invoice_date']" position="after">
+                <div t-if="o.id_transaccion" class="col-auto col-3 mw-100 mb-2">
+                    <strong>ID Transacción:</strong>
+                    <p class="m-0" t-field="o.id_transaccion"/>
+                </div>
+            </xpath>
+        </template>
+
+
+
+
+    </data>
+
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="product_template_form_view" model="ir.ui.view">
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <page name="sales" position="inside">
+                <group string="Canon LPI">
+                    <field name="canon_lpi_id"/>
+                    <field name="amount_lpi" attrs="{'invisible': [('canon_lpi_id', '=', False)]}"/>
+                </group>
+            </page>
+        </field>
+    </record>
+</odoo>

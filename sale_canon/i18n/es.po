@@ -1,0 +1,132 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sale_canon
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-12-15 06:14+0000\n"
+"PO-Revision-Date: 2022-12-15 07:15+0100\n"
+"Last-Translator: cubells <vicent@vcubells.net>\n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 3.2.2\n"
+
+#. module: sale_canon
+#: code:addons/sale_canon/models/sale_order_line.py:0
+#, python-format
+msgid ""
+"\n"
+"{} of {} x {} = {}"
+msgstr ""
+"\n"
+"{} de {} x {} = {}"
+
+#. module: sale_canon
+#: model:ir.model.fields,field_description:sale_canon.field_canon_lpi__amount
+#: model:ir.model.fields,field_description:sale_canon.field_product_product__amount_lpi
+#: model:ir.model.fields,field_description:sale_canon.field_product_template__amount_lpi
+msgid "Amount"
+msgstr "Importe"
+
+#. module: sale_canon
+#: model:ir.model.fields,field_description:sale_canon.field_res_brand__canon_excluded
+#: model:ir.model.fields,field_description:sale_canon.field_res_partner__canon_excluded
+#: model:ir.model.fields,field_description:sale_canon.field_res_users__canon_excluded
+msgid "Canon Excluded"
+msgstr "Excluído del canon"
+
+#. module: sale_canon
+#: model:ir.model,name:sale_canon.model_canon_lpi
+#: model_terms:ir.ui.view,arch_db:sale_canon.product_template_form_view
+#: model:product.product,name:sale_canon.product_canon_lpi
+#: model:product.template,name:sale_canon.product_canon_lpi_product_template
+msgid "Canon LPI"
+msgstr "Canon LPI"
+
+#. module: sale_canon
+#: model:ir.model.fields,field_description:sale_canon.field_product_product__canon_lpi_id
+#: model:ir.model.fields,field_description:sale_canon.field_product_template__canon_lpi_id
+msgid "Canon Lpi"
+msgstr "Canon LPI"
+
+#. module: sale_canon
+#: model:ir.model.fields,field_description:sale_canon.field_canon_lpi__company_id
+msgid "Company"
+msgstr "Compañía"
+
+#. module: sale_canon
+#: model:ir.model,name:sale_canon.model_res_partner
+msgid "Contact"
+msgstr "Contacto"
+
+#. module: sale_canon
+#: model:ir.model.fields,field_description:sale_canon.field_canon_lpi__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: sale_canon
+#: model:ir.model.fields,field_description:sale_canon.field_canon_lpi__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: sale_canon
+#: model:ir.model.fields,field_description:sale_canon.field_canon_lpi__currency_id
+msgid "Currency"
+msgstr "Moneda"
+
+#. module: sale_canon
+#: model:ir.model.fields,field_description:sale_canon.field_canon_lpi__display_name
+msgid "Display Name"
+msgstr "Nombre a mostrar"
+
+#. module: sale_canon
+#: model:ir.model.fields,field_description:sale_canon.field_canon_lpi__id
+msgid "ID"
+msgstr "ID"
+
+#. module: sale_canon
+#: model:ir.model.fields,field_description:sale_canon.field_canon_lpi____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: sale_canon
+#: model:ir.model.fields,field_description:sale_canon.field_canon_lpi__write_uid
+msgid "Last Updated by"
+msgstr "Actualizado por última vez por"
+
+#. module: sale_canon
+#: model:ir.model.fields,field_description:sale_canon.field_canon_lpi__write_date
+msgid "Last Updated on"
+msgstr "Ultima actualización el"
+
+#. module: sale_canon
+#: model:ir.model.fields,field_description:sale_canon.field_canon_lpi__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: sale_canon
+#: model:ir.model,name:sale_canon.model_product_template
+msgid "Product Template"
+msgstr "Plantilla de producto"
+
+#. module: sale_canon
+#: model:ir.model,name:sale_canon.model_sale_order
+msgid "Sales Order"
+msgstr "Pedido de venta"
+
+#. module: sale_canon
+#: model:ir.model,name:sale_canon.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Linea de pedido de venta"
+
+#. module: sale_canon
+#: model:product.product,uom_name:sale_canon.product_canon_lpi
+#: model:product.template,uom_name:sale_canon.product_canon_lpi_product_template
+msgid "Units"
+msgstr "Unidades"
