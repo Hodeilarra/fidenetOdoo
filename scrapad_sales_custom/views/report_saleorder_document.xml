@@ -2,16 +2,14 @@
 <odoo>
     <data>
         <template id="report_saleorder_document_extend" inherit_id="sale.report_saleorder_document">
-            <xpath expr="//div[@id='informations']//div[@t-if='doc.user_id.name']" position="replace">
+            <xpath expr="//div[@id='informations']//div[@t-if='doc.user_id.name']"
+                position="replace">
                 <!-- Aquí puedes agregar el contenido que deseas reemplazar -->
                 <div t-if="doc.id_transaccion" class="col-auto col-3 mw-100 mb-2">
-                <strong> Id Transacción</strong>
-                 <p class="m-0" t-field="doc.id_transaccion"/>
-                 </div>
+                    <strong> Id Transacción</strong>
+                    <p class="m-0" t-field="doc.id_transaccion" />
+                </div>
             </xpath>
-
         </template>
-
     </data>
-
 </odoo>

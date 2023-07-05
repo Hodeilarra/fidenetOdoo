@@ -4,6 +4,7 @@ class SaleOrder(models.Model):
     _inherit = 'sale.order'
     
     id_transaccion = fields.Char(string='ID Transacción', readonly=True)
+    margin = fields.Float(string='Margin', currency_field='currency_id')
 
 
     @api.model

@@ -4,16 +4,25 @@
         <record id="view_order_form_inherit" model="ir.ui.view">
             <field name="name">sale.order.form.inherit</field>
             <field name="model">sale.order</field>
-            <field name="inherit_id" ref="sale.view_order_form"/>
-            <!-- ID de la vista a extender -->
+            <field name="inherit_id" ref="sale.view_order_form" />
             <field name="arch" type="xml">
                 <field name="partner_id" position="after">
-
-                    <field name="id_transaccion"/>
+                    <field name="id_transaccion" />
                 </field>
             </field>
         </record>
 
+        <record id="view_quotation_tree_inherit" model="ir.ui.view">
+            <field name="name">sale.order.tree.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='amount_total']" position="after">
+                    <field name="margin" sum="Total Tax Included" widget="monetary"
+                        decoration-bf="1" optional="show" />
+                </xpath>
+            </field>
+        </record>
 
     </data>
 </odoo>
